@@ -11,7 +11,7 @@ Press **Alt**+**X** to open the Input Field to create a class, <span style="colo
 Type in the name, and there you go. You will directly see, when the file is created.
 
 
-![Demo](https://github.com/tzAcee/cpp-class-creator/gif/giphy.gif?raw=true)
+![Demo](https://github.com/tzAcee/cpp-class-creator/giphy.gif?raw=true)
 
 ## Known Issues
 
