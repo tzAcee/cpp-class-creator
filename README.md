@@ -1,10 +1,13 @@
 # cpp-class-creator README
 
-Hey I'm Maxim. I wanted created a little c++ extension to create classes. I can work on it when I have time in order to improve it.
+Hey I'm Maxim. I wanted created a little c++ extension to create classes.
+
+I can work on it when I have time in order to improve it. Just open some Issues or Pull Request. Im happy to work on them!
 
 ## Features
 
 Press **Alt**+**X** to open the Input Field to create a class, <span style="color:red">**while you are focusing the editor!**</span>
+
 Type in the name, and there you go. You will directly see, when the file is created.
 
 ## Known Issues
