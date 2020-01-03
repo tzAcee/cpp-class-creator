@@ -33,6 +33,10 @@ Some minor Error Handeling
 
 Icon Uploaded
 
+### 0.3-0.5.0
+
+Demo + minor documentation
+
 ----------------------------------------------------------------------------------------------------------
 
 **Enjoy!**
