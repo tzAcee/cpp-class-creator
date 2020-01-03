@@ -7,7 +7,7 @@
 	"repository": {
 		"url": "https://github.com/tzAcee/cpp-class-creator.git"
 	},
-	"version": "0.4.0",
+	"version": "0.5.0",
 	"engines": {
 		"vscode": "^1.41.0"
 	},
@@ -41,14 +41,12 @@
 				]
 			}
 		],
-		"configuration":[
+		"configuration": [
 			{
 				"title": "C++ SFML Extension [Experimental]",
-				"properties":
-				{
-					"cpp.sfml.addClassToTask":
-					{
-						"type":"boolean",
+				"properties": {
+					"cpp.sfml.addClassToTask": {
+						"type": "boolean",
 						"default": false,
 						"description": "For my own experimental purposes. Adds the created file to the gcc parameters for building sfml project."
 					}
