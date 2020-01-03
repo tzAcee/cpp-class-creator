@@ -90,6 +90,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	let disposable = vscode.commands.registerCommand('extension.createClass', () => {
 		// The code you place here will be executed every time your command is executed
+
 		var input = create_input().then(function (res)
 		{
 			if (!res)
