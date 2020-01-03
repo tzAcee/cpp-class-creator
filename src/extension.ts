@@ -7,10 +7,10 @@ import * as fs from 'fs';
 function create_input()
 {
 	var option: vscode.InputBoxOptions = {
-		ignoreFocusOut:false,
+		ignoreFocusOut: false,
 		placeHolder: "foo it in the bar.",
 		prompt: "Type your class name"
-	}
+	};
 	return vscode.window.showInputBox(option);
 }
 
@@ -66,11 +66,47 @@ function create_cpp(name: string, dir: string)
 	return true;
 }
 
+interface MyObj {
+    version: string;
+    myNumber: number;
+}
+
+function add_to_task(name: string, dir: string)
+{
+	var real_dir = dir + "/.vscode/tasks.json";
+	if (!fs.existsSync(real_dir)) return;
+
+
+	var json_inp = fs.readFileSync(real_dir, 'utf-8');
+
+	var jsonA = JSON.parse(json_inp);
+
+
+	var tasks = jsonA["tasks"];
+
+
+	for (var i = 0; i < tasks.length; i++)
+	{
+		if (jsonA["tasks"][i]["label"] = "g++ build active sfmlfile")
+		{
+			jsonA["tasks"][i]["args"].push("${fileDirname}/" + name + "/" + name + ".cpp");
+		}
+	}
+	jsonA = JSON.stringify(jsonA, null, 1);
+
+	fs.writeFileSync(real_dir, jsonA);
+	
+}
+
 function create_class(name: string)
 {
 	var dir = vscode.workspace.rootPath+"/" + name;
-	if (fs.existsSync(dir)){
-		return false;
+	if (fs.existsSync(dir)) {
+		var stats = fs.lstatSync(dir);
+
+		if (stats.isDirectory()) {
+			return false;
+		}
 	}
 	fs.mkdirSync(dir);
 
@@ -109,10 +145,19 @@ export function activate(context: vscode.ExtensionContext) {
 				return;
 			}
 			var out = create_class(res);
-			if(out)
-				vscode.window.showInformationMessage('Your Class ' + res + '  has been created!');
+			if (out)
+			{
+				if (vscode.workspace.getConfiguration("cpp.sfml.addClassToTask"))
+				{
+					var test: string = vscode.workspace.rootPath+"";
+					add_to_task(res, test);
+				}
+					vscode.window.showInformationMessage('Your Class ' + res + '  has been created!');
+			}
 			else
+			{
 				vscode.window.showErrorMessage('Your Class ' + res + '  has been not created!');
+			}
 		});
 		// Display a message box to the user
 
