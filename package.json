@@ -3,8 +3,10 @@
 	"displayName": "C++ Class Creator",
 	"description": "A very simple class creation extension for Visual Studio Code from FleeXo",
 	"publisher": "FleeXo",
-	"repository": {"url": "https://github.com/tzAcee/cpp-class-creator.git"},
-	"version": "0.0.1",
+	"repository": {
+		"url": "https://github.com/tzAcee/cpp-class-creator.git"
+	},
+	"version": "0.1.0",
 	"engines": {
 		"vscode": "^1.41.0"
 	},
