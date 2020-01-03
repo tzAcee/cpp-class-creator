@@ -97,6 +97,16 @@ export function activate(context: vscode.ExtensionContext) {
 				vscode.window.showErrorMessage("Your Class could not be created!");
 				return;
 			}
+			else if (res.length > 12)
+			{
+				vscode.window.showErrorMessage("Class name to long!");
+				return;
+			}
+			else if (res.indexOf(' ') >= 0)
+			{
+				vscode.window.showErrorMessage("Class name should not have spaces!");
+				return;
+			}
 			var out = create_class(res);
 			if(out)
 				vscode.window.showInformationMessage('Your Class ' + res + '  has been created!');
