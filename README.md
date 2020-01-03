@@ -4,7 +4,7 @@ Hey I'm Maxim. I wanted created a little c++ extension to create classes. I can 
 
 ## Features
 
-Press **Alt**+**X** to open the Input Field to create a class, <span style="color:red">**while you are focusing the editor!</span>
+Press **Alt**+**X** to open the Input Field to create a class, <span style="color:red">**while you are focusing the editor!**</span>
 Type in the name, and there you go. You will directly see, when the file is created.
 
 ## Known Issues
