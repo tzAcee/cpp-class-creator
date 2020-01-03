@@ -11,7 +11,7 @@ Press **Alt**+**X** to open the Input Field to create a class, <span style="colo
 Type in the name, and there you go. You will directly see, when the file is created.
 
 
-<iframe src="https://giphy.com/embed/l2vXIUjFIsx1WFjACj" width="444" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/l2vXIUjFIsx1WFjACj">via GIPHY</a></p>
+![Demo](https://github.com/tzAcee/cpp-class-creator/gif/giphy.gif?raw=true)
 
 ## Known Issues
 
