@@ -10,6 +10,7 @@ Press **Alt**+**X** to open the Input Field to create a class, <span style="colo
 
 Type in the name, and there you go. You will directly see, when the file is created.
 
+Additionaly you can set the path where the file has to be created: check Settings at the bottom.
 
 ![Demo](https://github.com/tzAcee/cpp-class-creator/blob/master/giphy.gif?raw=true)
 
@@ -19,6 +20,7 @@ Type in the name, and there you go. You will directly see, when the file is crea
 
 ## Settings
 "cpp.sfml.*" - Experimental, not really usefull, just for my private usage
+
 "cpp.creator.setPath": = "string" | null : set your path where the class should be created
 
 ## Release Notes
