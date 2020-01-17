@@ -17,6 +17,10 @@ Type in the name, and there you go. You will directly see, when the file is crea
 
 -Class can be created, while the language is not c++
 
+## Settings
+"cpp.sfml.*" - Experimental, not really usefull, just for my private usage
+"cpp.creator.setPath": = "string" | null : set your path where the class should be created
+
 ## Release Notes
 
 Init release of C++ Class Creator. Have fun. Make Pull Request when you have feature ideas.

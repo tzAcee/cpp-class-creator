@@ -66,15 +66,10 @@ function create_cpp(name: string, dir: string)
 	return true;
 }
 
-interface MyObj {
-    version: string;
-    myNumber: number;
-}
-
 function add_to_task(name: string, dir: string)
 {
 	var real_dir = dir + "/.vscode/tasks.json";
-	if (!fs.existsSync(real_dir)) return;
+	if (!fs.existsSync(real_dir)) { return; }
 
 
 	var json_inp = fs.readFileSync(real_dir, 'utf-8');
@@ -98,9 +93,8 @@ function add_to_task(name: string, dir: string)
 	
 }
 
-function create_class(name: string)
+function create_class(name: string, dir: string)
 {
-	var dir = vscode.workspace.rootPath+"/" + name;
 	if (fs.existsSync(dir)) {
 		var stats = fs.lstatSync(dir);
 
@@ -144,7 +138,11 @@ export function activate(context: vscode.ExtensionContext) {
 				vscode.window.showErrorMessage("Class name should not have spaces!");
 				return;
 			}
-			var out = create_class(res);
+			let dir :string | undefined= vscode.workspace.getConfiguration().get("cpp.creator.setPath");
+			if (dir == null) {
+				dir = vscode.workspace.rootPath + "/" + res;
+			}
+			var out = create_class(res, dir);
 			if (out)
 			{
 				if (vscode.workspace.getConfiguration("cpp.sfml.addClassToTask"))

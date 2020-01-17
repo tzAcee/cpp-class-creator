@@ -43,12 +43,22 @@
 		],
 		"configuration": [
 			{
-				"title": "C++ SFML Extension [Experimental]",
+				"title": "C++ Class SFML Extension [Experimental]",
 				"properties": {
 					"cpp.sfml.addClassToTask": {
 						"type": "boolean",
 						"default": false,
 						"description": "For my own experimental purposes. Adds the created file to the gcc parameters for building sfml project."
+					}
+				}
+			},
+			{
+				"title": "C++ Class Creator",
+				"properties": {
+					"cpp.creator.setPath": {
+						"type": ["string", "null"],
+						"default": null,
+						"description": "Specifies the path, where the class is created. [setting: cpp.creator.setPath = \"path\""
 					}
 				}
 			}
