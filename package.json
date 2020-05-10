@@ -58,10 +58,16 @@
 					"cpp.creator.setPath": {
 						"type": [
 							"string",
-							"null"
+							"null",
+							"boolean"
 						],
 						"default": null,
-						"description": "Specifies the path, where the class is created. [setting: cpp.creator.setPath = \"path\""
+						"description": "Specifies the path, where the class is created or set it to true when you want the path to be dynamically inputted. [setting: cpp.creator.setPath = \"path\" or true]"
+					},
+					"cpp.creator.createFolder": {
+						"type": "boolean",
+						"default": false,
+						"description": "Create an extra folder for the class."
 					}
 				}
 			}

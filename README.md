@@ -19,29 +19,42 @@ Additionaly you can set the path where the file has to be created: check Setting
 -Class can be created, while the language is not c++
 
 ## Settings
-"cpp.sfml.*" - Experimental, not really usefull, just for my private usage
+'''"cpp.sfml.*" - Experimental, not really usefull, just for my private usage'''
 
-"cpp.creator.setPath": = "string" | null : set your path where the class should be created
+'''"cpp.creator.setPath": = "string" | null | boolean : [NULL by default] set your path where the class should be created as a string. When it's null your class will be created in the current workspace. Set it to true, when you want a input window to appear on every class creation where you can set creation path. On false it will also be created in the current workspace.'''
+
+'''"cpp.creator.createFolder": = boolean : [FALSE by default] set it to true, so a folder for the class will be created in your workspace -> Only possible when setPath is null.'''
 
 ## Release Notes
 
-Init release of C++ Class Creator. Have fun. Make Pull Request when you have feature ideas.
+Init release of C++ Class Creator.
+Have fun.
 
-### 0.0.1
+Make Pull Request when you have feature ideas.
 
-Initial release of C++ Class Creator
+### 0.6
 
-### 0.1.0
+- Added header protection
+- Fixed some issues from the github repository
+- Added Settings [See all available under "Settings"]
+- Increased max class length to 60
 
-Some minor Error Handeling
+### 0.3-0.5.0
+
+Demo + minor documentation
 
 ### 0.2.0
 
 Icon Uploaded
 
-### 0.3-0.5.0
+### 0.1.0
 
-Demo + minor documentation
+Some minor Error Handeling
+
+
+### 0.0.1
+
+Initial release of C++ Class Creator
 
 ----------------------------------------------------------------------------------------------------------
 

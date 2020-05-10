@@ -4,7 +4,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 
 
-function create_input()
+function create_name_input()
 {
 	var option: vscode.InputBoxOptions = {
 		ignoreFocusOut: false,
@@ -14,10 +14,23 @@ function create_input()
 	return vscode.window.showInputBox(option);
 }
 
+async function create_path_input()
+{
+	var option: vscode.InputBoxOptions = {
+		ignoreFocusOut: false,
+		placeHolder: "Give me your path.",
+		prompt: "Type a valid path"
+	};
+	return await vscode.window.showInputBox(option);
+}
+
 function create_hpp(name: string, dir: string)
 {
 	var hpp_buffer =
-`class ` + name +`  
+		`
+#pragma once
+
+class ` + name +`  
 {
 	private:
 
@@ -98,11 +111,12 @@ function create_class(name: string, dir: string)
 	if (fs.existsSync(dir)) {
 		var stats = fs.lstatSync(dir);
 
-		if (stats.isDirectory()) {
+		if (!stats.isDirectory()) {
 			return false;
 		}
 	}
-	fs.mkdirSync(dir);
+	else
+		fs.mkdirSync(dir);
 
 	var hpp = create_hpp(name, dir);
 	var cpp = create_cpp(name, dir);
@@ -121,14 +135,14 @@ export function activate(context: vscode.ExtensionContext) {
 	let disposable = vscode.commands.registerCommand('extension.createClass', () => {
 		// The code you place here will be executed every time your command is executed
 
-		var input = create_input().then(function (res)
+		var input = create_name_input().then(async function (res)
 		{
 			if (!res)
 			{
 				vscode.window.showErrorMessage("Your Class could not be created!");
 				return;
 			}
-			else if (res.length > 12)
+			else if (res.length > 60)
 			{
 				vscode.window.showErrorMessage("Class name to long!");
 				return;
@@ -138,11 +152,24 @@ export function activate(context: vscode.ExtensionContext) {
 				vscode.window.showErrorMessage("Class name should not have spaces!");
 				return;
 			}
-			let dir :string | undefined= vscode.workspace.getConfiguration().get("cpp.creator.setPath");
+			let dir :string | undefined | boolean= vscode.workspace.getConfiguration().get("cpp.creator.setPath");
+			if (dir == false)
+				dir = null as any;
 			if (dir == null) {
-				dir = vscode.workspace.rootPath + "/" + res;
+				dir = vscode.workspace.rootPath as string;
+				let createFolder: boolean | undefined = vscode.workspace.getConfiguration().get("cpp.creator.createFolder");
+				if (createFolder)
+					dir += "/" + res;
 			}
-			var out = create_class(res, dir);
+			else if (dir == true)
+			{
+				dir = await create_path_input();
+				if (!dir)
+				{
+					dir = vscode.workspace.rootPath as string;
+				}
+			}
+			var out = create_class(res, dir as string);
 			if (out)
 			{
 				if (vscode.workspace.getConfiguration("cpp.sfml.addClassToTask"))
