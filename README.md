@@ -18,7 +18,7 @@ Additionaly you can set the path where the file has to be created: check Setting
 
 -Class can be created, while the language is not c++
 
-## Settings
+## Settings [settings.json of VS-Code]
 
 ```"cpp.sfml.*" - Experimental, not really usefull, just for my private usage```
 
