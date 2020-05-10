@@ -22,7 +22,7 @@ Additionaly you can set the path where the file has to be created: check Setting
 
 ```"cpp.sfml.*" - Experimental, not really usefull, just for my private usage```
 
-```"cpp.creator.setPath": = "string" | null | boolean : [NULL by default] set your path where the class should be created as a string. When it's null your class will be created in the current workspace. Set it to true, when you want a input window to appear on every class creation where you can set creation path. On false it will also be created in the current workspace.```
+```"cpp.creator.setPath": = "string" | null | boolean : [NULL by default] set your path where the class should be created as a string. When it's null your class will be created in the current workspace. Set it to true, when you want a input window to appear on every class creation where you can set creation path. On false or on an empty path input box it will also be created in the current workspace.```
 
 ```"cpp.creator.createFolder": = boolean : [FALSE by default] set it to true, so a folder for the class will be created in your workspace -> Only possible when setPath is null.```
 
