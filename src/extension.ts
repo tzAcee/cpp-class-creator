@@ -4,7 +4,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 
 
-function create_name_input()
+async function create_name_input()
 {
 	var option: vscode.InputBoxOptions = {
 		ignoreFocusOut: false,
@@ -24,12 +24,21 @@ async function create_path_input()
 	return await vscode.window.showInputBox(option);
 }
 
-function create_hpp(name: string, dir: string)
+function create_hpp_buffer(name: string)
 {
-	var hpp_buffer =
-		`
-#pragma once
 
+
+	const ifndef_head = 
+	`#ifndef `+name.toUpperCase()+`_H
+#define `+name.toUpperCase()+`_H`;
+
+
+	const pragma_once_buffer =
+	`
+#pragma once`;
+
+	const default_info = `
+	
 class ` + name +`  
 {
 	private:
@@ -40,6 +49,37 @@ class ` + name +`
 		~`+name+`();
 
 };`;
+
+	const ifndef_end= `
+#endif`;
+
+	var output : string;
+	const useIfnDef : boolean = vscode.workspace.getConfiguration().get("cpp.creator.headerProtection.useIfnDef") as boolean;
+	const usePragma : boolean = vscode.workspace.getConfiguration().get("cpp.creator.headerProtection.usePragmaOnce") as boolean;
+
+	if(useIfnDef && usePragma)
+	{
+		output = ifndef_head+pragma_once_buffer+default_info+ifndef_end;
+	}
+	else if(useIfnDef)
+	{
+		output = ifndef_head+default_info+ifndef_end;		
+	}
+	else if(usePragma)
+	{
+		output = pragma_once_buffer+default_info;
+	}
+	else
+	{
+		output = default_info;
+	}
+
+	return output;
+}
+
+function create_hpp(name: string, dir: string)
+{
+	var hpp_buffer = create_hpp_buffer(name);
 	var hpp_name = dir+"/"+name + '.hpp';
 	fs.writeFile(hpp_name, hpp_buffer, function (err)
 	{
@@ -53,20 +93,27 @@ class ` + name +`
 	return true;
 }
 
-function create_cpp(name: string, dir: string)
+function create_cpp_buffer(name: string)
 {
 	var cpp_buffer =
-`#include "` + name +`.hpp"  
-
+	`#include "` + name +`.hpp"  
+	
 `+name+`::`+ name +`()
 {
-
+	
 }
-
+	
 `+name+`::~`+ name + `()
 {
-
+	
 }`;
+
+	return cpp_buffer;
+}
+
+function create_cpp(name: string, dir: string)
+{
+	var cpp_buffer = create_cpp_buffer(name);
 	var cpp_name = dir+"/"+name + '.cpp';
 	fs.writeFile(cpp_name, cpp_buffer, function (err)
 	{
@@ -79,44 +126,17 @@ function create_cpp(name: string, dir: string)
 	return true;
 }
 
-function add_to_task(name: string, dir: string)
-{
-	var real_dir = dir + "/.vscode/tasks.json";
-	if (!fs.existsSync(real_dir)) { return; }
-
-
-	var json_inp = fs.readFileSync(real_dir, 'utf-8');
-
-	var jsonA = JSON.parse(json_inp);
-
-
-	var tasks = jsonA["tasks"];
-
-
-	for (var i = 0; i < tasks.length; i++)
-	{
-		if (jsonA["tasks"][i]["label"] = "g++ build active sfmlfile")
-		{
-			jsonA["tasks"][i]["args"].push("${fileDirname}/" + name + "/" + name + ".cpp");
-		}
-	}
-	jsonA = JSON.stringify(jsonA, null, 1);
-
-	fs.writeFileSync(real_dir, jsonA);
-	
-}
-
 function create_class(name: string, dir: string)
 {
 	if (fs.existsSync(dir)) {
 		var stats = fs.lstatSync(dir);
 
 		if (!stats.isDirectory()) {
-			return false;
+			return false; // if the give directory path, isnt a directory, you cant create a class
 		}
 	}
 	else
-		fs.mkdirSync(dir);
+		fs.mkdirSync(dir); // if the path doesnt exist, just create the directory
 
 	var hpp = create_hpp(name, dir);
 	var cpp = create_cpp(name, dir);
@@ -124,59 +144,61 @@ function create_class(name: string, dir: string)
 	return (hpp && cpp);
 }
 
+function can_continue(res: any)
+{
+	if (!res)
+	{
+		vscode.window.showErrorMessage("Your Class could not be created!");
+		return false;
+	}
+	else if (res.length > 60)
+	{
+		vscode.window.showErrorMessage("Class name to long!");
+		return false;
+	}
+	else if (res.indexOf(' ') >= 0)
+	{
+		vscode.window.showErrorMessage("Class name should not have spaces!");
+		return false;
+	}
+	return true;
+}
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+export async function activate(context: vscode.ExtensionContext) {
 
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "cpp-class-creator" is now active!');
 
-	let disposable = vscode.commands.registerCommand('extension.createClass', () => {
+	let disposable = vscode.commands.registerCommand('extension.createClass', async () => {
 		// The code you place here will be executed every time your command is executed
 
-		var input = create_name_input().then(async function (res)
-		{
-			if (!res)
-			{
-				vscode.window.showErrorMessage("Your Class could not be created!");
-				return;
-			}
-			else if (res.length > 60)
-			{
-				vscode.window.showErrorMessage("Class name to long!");
-				return;
-			}
-			else if (res.indexOf(' ') >= 0)
-			{
-				vscode.window.showErrorMessage("Class name should not have spaces!");
-				return;
-			}
+		var res = await create_name_input();
+			if(!can_continue(res)) return; // check for class name
+
 			let dir :string | undefined | boolean= vscode.workspace.getConfiguration().get("cpp.creator.setPath");
-			if (dir == false)
-				dir = null as any;
-			if (dir == null) {
-				dir = vscode.workspace.rootPath as string;
+		//	if (dir == false)
+		//		dir = null as any; // stupid parsing
+			if (dir == null || dir == false) {
+				dir = vscode.workspace.rootPath as string; // use workspace path
 				let createFolder: boolean | undefined = vscode.workspace.getConfiguration().get("cpp.creator.createFolder");
-				if (createFolder)
+				if (createFolder) // create the folder where to put the class
 					dir += "/" + res;
 			}
 			else if (dir == true)
 			{
-				dir = await create_path_input();
+				dir = await create_path_input(); // ask for path
 				if (!dir)
 				{
-					dir = vscode.workspace.rootPath as string;
+					dir = vscode.workspace.rootPath as string; // if empty input, just use workspace path
 				}
 			}
-			var out = create_class(res, dir as string);
+			var out = create_class(res as string, dir as string); // if setPath was neither false, null or true, it was a string, so maybe a valid path? 
+																  //Create the class there
 			if (out)
 			{
-				if (vscode.workspace.getConfiguration("cpp.sfml.addClassToTask"))
-				{
-					var test: string = vscode.workspace.rootPath+"";
-					add_to_task(res, test);
-				}
 					vscode.window.showInformationMessage('Your Class ' + res + '  has been created!');
 			}
 			else
@@ -185,8 +207,6 @@ export function activate(context: vscode.ExtensionContext) {
 			}
 		});
 		// Display a message box to the user
-
-	});
 
 	context.subscriptions.push(disposable);
 }

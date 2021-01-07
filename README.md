@@ -19,45 +19,27 @@ Additionaly you can set the path where the file has to be created: check Setting
 -Class can be created, while the language is not c++
 
 ## Settings [settings.json of VS-Code]
-
-```"cpp.sfml.*" - ``` Experimental, not really usefull, just for my private usage
+```"cpp.creator.headerProtection.useIfnDef": = boolean : [TRUE by default] ``` will add the default \*ifned, define, endif\* structure to the header file of the created class.
+```"cpp.creator.headerProtection.usePragmaOnce": = boolean : [TRUE by default] ``` will add \*#pragma once\* to the header file of the created class.
+Header Protection can be used in combination (ifndef and pragma once)
 
 ```"cpp.creator.setPath": = "string" | null | boolean : [NULL by default] ``` set your path where the class should be created as a string. When it's null your class will be created in the current workspace. Set it to true, when you want a input window to appear on every class creation where you can set creation path. On false or on an empty path input box it will also be created in the current workspace.
 
 ```"cpp.creator.createFolder": = boolean : [FALSE by default] ``` set it to true, so a folder for the class will be created in your workspace -> Only possible when setPath is null.
 
-## Release Notes
 
-Init release of C++ Class Creator.
+---
+
 Have fun.
 
 Make Pull Request when you have feature ideas.
 
-### 0.10.0
+### Changelog
 
-- Added header protection
-- Fixed some issues from the github repository
-- Added Settings [See all available under "Settings"]
-- Increased max class length to 60
+- Added Header Protection settings
+- little refactorings
+- removed experimental settings
 
-### 0.3-0.5.0
-
-Demo + minor documentation
-
-### 0.2.0
-
-Icon Uploaded
-
-### 0.1.0
-
-Some minor Error Handeling
-
-
-### 0.0.1
-
-Initial release of C++ Class Creator
-
-----------------------------------------------------------------------------------------------------------
 
 **Enjoy!**
 
