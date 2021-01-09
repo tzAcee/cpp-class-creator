@@ -32,7 +32,7 @@ Header Protection can be used in combination (ifndef and pragma once)
 
 Have fun.
 
-Make Pull Request when you have feature ideas.
+Make Pull Request when you have feature ideas & if you want, support me by sponsoring my github account :)
 
 ### Changelog
 
