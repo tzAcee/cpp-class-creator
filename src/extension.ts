@@ -80,7 +80,15 @@ class ` + name +`
 function create_hpp(name: string, dir: string)
 {
 	var hpp_buffer = create_hpp_buffer(name);
-	var hpp_name = dir+"/"+name + '.hpp';
+	var hpp_name: string;
+	if(vscode.workspace.getConfiguration().get("cpp.creator.useHPPEnding") as boolean === true)
+	{
+		hpp_name = dir+"/"+name + '.hpp';
+	}
+	else 
+	{
+		hpp_name = dir+"/"+name + '.h';
+	}
 	fs.writeFile(hpp_name, hpp_buffer, function (err)
 	{
 		if (err) {

@@ -59,6 +59,11 @@
 						"default": false,
 						"description": "Create an extra folder for the class."
 					},
+					"cpp.creator.useHPPEnding": {
+						"type": "boolean",
+						"default": true,
+						"description": "Use the C++ header naming (.hpp), if set to false the extension will create .h files"
+					},
 					"cpp.creator.headerProtection.usePragmaOnce": {
 						"type": "boolean",
 						"default": true,
