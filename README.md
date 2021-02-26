@@ -39,6 +39,7 @@ Make Pull Request when you have feature ideas & if you want, support me by spons
 
 ### Changelog
 
+- Added context menu class creation
 - Added Header Protection settings
 - little refactorings
 - removed experimental settings

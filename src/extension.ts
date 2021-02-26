@@ -2,6 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import * as fs from 'fs';
+import * as path from 'path';
 
 
 async function create_name_input()
@@ -180,15 +181,24 @@ export async function activate(context: vscode.ExtensionContext) {
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "cpp-class-creator" is now active!');
 
-	let disposable = vscode.commands.registerCommand('extension.createClass', async () => {
+	let disposable = vscode.commands.registerCommand('extension.createClass', async (args) => {
 		// The code you place here will be executed every time your command is executed
 
 		var res = await create_name_input();
 			if(!can_continue(res)) return; // check for class name
 
 			let dir :string | undefined | boolean= vscode.workspace.getConfiguration().get("cpp.creator.setPath");
-		//	if (dir == false)
-		//		dir = null as any; // stupid parsing
+			// If it's called via the context menu, it's gonna have the _fsPath set from where you're clicking
+			if (args != null && args._fsPath != null) {
+				dir = args._fsPath;
+				if (typeof dir === "string" && fs.existsSync(dir)) {
+					var stats = fs.lstatSync(dir);
+					if (!stats.isDirectory()) {
+						//If it's not a directory then it's the file so get the parent directory
+						dir = path.dirname(args._fsPath);
+					}
+				}
+			}
 			if (dir == null || dir == false) {
 				dir = vscode.workspace.rootPath as string; // use workspace path
 				let createFolder: boolean | undefined = vscode.workspace.getConfiguration().get("cpp.creator.createFolder");
