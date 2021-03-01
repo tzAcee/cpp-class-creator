@@ -25,6 +25,14 @@
 				"command": "extension.createClass"
 			}
 		],
+		"menus": {
+			"explorer/context": [
+				{
+					"group": "navigation@-1",
+					"command": "extension.createClass"
+				}
+			]
+		},
 		"keybindings": [
 			{
 				"command": "extension.createClass",
