@@ -78,18 +78,25 @@ class ` + name +`
 	return output;
 }
 
-function create_hpp(name: string, dir: string)
+function get_include_name(name: string)
 {
-	var hpp_buffer = create_hpp_buffer(name);
-	var hpp_name: string;
-	if(vscode.workspace.getConfiguration().get("cpp.creator.useHPPEnding") as boolean === true)
+	var include_name: string;
+	if (vscode.workspace.getConfiguration().get("cpp.creator.useHPPEnding") as boolean === true)
 	{
-		hpp_name = dir+"/"+name + '.hpp';
+		include_name = name + '.hpp';
 	}
 	else 
 	{
-		hpp_name = dir+"/"+name + '.h';
+		include_name = name + '.h';
 	}
+	
+	return include_name;
+}
+
+function create_hpp(name: string, dir: string)
+{
+	var hpp_buffer = create_hpp_buffer(name);
+	var hpp_name = get_include_name(name);
 	fs.writeFile(hpp_name, hpp_buffer, function (err)
 	{
 		if (err) {
@@ -104,8 +111,9 @@ function create_hpp(name: string, dir: string)
 
 function create_cpp_buffer(name: string)
 {
+	var hpp_name = get_include_name(name);
 	var cpp_buffer =
-	`#include "` + name +`.hpp"  
+	`#include "` + hpp_name + `"  
 	
 `+name+`::`+ name +`()
 {
