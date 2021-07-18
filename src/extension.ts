@@ -96,7 +96,7 @@ function get_include_name(name: string)
 function create_hpp(name: string, dir: string)
 {
 	var hpp_buffer = create_hpp_buffer(name);
-	var hpp_name = get_include_name(name);
+	var hpp_name = dir+"/"+get_include_name(name);
 	fs.writeFile(hpp_name, hpp_buffer, function (err)
 	{
 		if (err) {
