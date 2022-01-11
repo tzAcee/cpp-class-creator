@@ -196,14 +196,14 @@ export async function activate(context: vscode.ExtensionContext) {
 			if(!can_continue(res)) return; // check for class name
 
 			let dir :string | undefined | boolean= vscode.workspace.getConfiguration().get("cpp.creator.setPath");
-			// If it's called via the context menu, it's gonna have the _fsPath set from where you're clicking
-			if (args != null && args._fsPath != null) {
-				dir = args._fsPath;
+			// If it's called via the context menu, it's gonna have the fsPath set from where you're clicking
+			if (args != null && args.fsPath != null) {
+				dir = args.fsPath;
 				if (typeof dir === "string" && fs.existsSync(dir)) {
 					var stats = fs.lstatSync(dir);
 					if (!stats.isDirectory()) {
 						//If it's not a directory then it's the file so get the parent directory
-						dir = path.dirname(args._fsPath);
+						dir = path.dirname(args.fsPath);
 					}
 				}
 			}
