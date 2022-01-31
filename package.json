@@ -62,6 +62,18 @@
 						"default": null,
 						"description": "Specifies the path, where the class is created or set it to true when you want the path to be dynamically inputted. [setting: cpp.creator.setPath = \"path\" or true]"
 					},
+					"cpp.creator.headerFileContentPreset": {
+						"type":"string",
+						"editPresentation": "multilineText",
+						"default": "#ifndef {{*CLASSNAMEUPPER*}}_H\n#define {{*CLASSNAMEUPPER*}}_H\nclass {{*CLASSNAME*}}\n{\npublic:\n    {{*CLASSNAME*}}();\n    ~{{*CLASSNAME*}}();\n\nprivate:\n\n};\n#endif",
+						"description": "Content of your created header file. \nAvailable commands are:\n{{*CLASSNAME*}} - entered classname.\n{{*CLASSNAMEUPPER*}} - entered classname in upper-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters."
+					},
+					"cpp.creator.sourceFileContentPreset": {
+						"type":"string",
+						"editPresentation": "multilineText",
+						"default": "#include \"{{*CLASSNAME*}}.hpp\"\n\n{{*CLASSNAME*}}::{{*CLASSNAME*}}()\n{\n\n}\n\n{{*CLASSNAME*}}::~{{*CLASSNAME*}}()\n{\n\n}",
+						"description":"Content of your created source file. \nAvailable commands are:\n{{*CLASSNAME*}} - entered classname.\n{{*CLASSNAMEUPPER*}} - entered classname in upper-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters."
+					},
 					"cpp.creator.createFolder": {
 						"type": "boolean",
 						"default": false,

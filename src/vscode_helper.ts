@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { class_creator } from './class_creator';
 
 export abstract class vscode_helper
 {
@@ -20,5 +21,38 @@ export abstract class vscode_helper
         prompt: "Type a valid path"
     };
     return await vscode.window.showInputBox(option);
+    }
+
+    public static can_continue(res: any)
+    {
+        if (!res)
+        {
+            vscode.window.showErrorMessage("Your Class could not be created!");
+            return false;
+        }
+        else if (res.length > 60)
+        {
+            vscode.window.showErrorMessage("Class name to long!");
+            return false;
+        }
+        else if (res.indexOf(' ') >= 0)
+        {
+            vscode.window.showErrorMessage("Class name should not have spaces!");
+            return false;
+        }
+        return true;
+    }
+
+    public static check_endings(class_creator: class_creator)
+    {
+        if (vscode.workspace.getConfiguration().get("cpp.creator.useCCEnding") as boolean === true)
+        {
+            class_creator.enable_cc_ending();
+        }
+
+        if (vscode.workspace.getConfiguration().get("cpp.creator.useHPPEnding") as boolean === true)
+        {
+            class_creator.enable_hpp_ending();
+        }
     }
 }
