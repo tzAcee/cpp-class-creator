@@ -72,6 +72,11 @@
 						"default": true,
 						"description": "Use the C++ header naming (.hpp), if set to false the extension will create .h files"
 					},
+					"cpp.creator.useCCEnding": {
+						"type": "boolean",
+						"default": true,
+						"description": "Use the C++ implementation file naming (.cc), if set to false the extension will create .cpp files"
+					},
 					"cpp.creator.headerProtection.usePragmaOnce": {
 						"type": "boolean",
 						"default": true,
@@ -81,6 +86,11 @@
 						"type": "boolean",
 						"default": true,
 						"description": "Adds *#ifndef* to the .hpp buffer."
+					},
+					"cpp.creator.privateFirst": {
+						"type": "boolean",
+						"default": true,
+						"description": "Wheather private: should go before or after public: in the header file. If set to true private goes first."
 					}
 				}
 			}
