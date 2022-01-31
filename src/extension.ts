@@ -3,27 +3,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
-
-
-async function create_name_input()
-{
-    var option: vscode.InputBoxOptions = {
-        ignoreFocusOut: false,
-        placeHolder: "foo it in the bar.",
-        prompt: "Type your class name"
-    };
-    return vscode.window.showInputBox(option);
-}
-
-async function create_path_input()
-{
-    var option: vscode.InputBoxOptions = {
-        ignoreFocusOut: false,
-        placeHolder: "Give me your path.",
-        prompt: "Type a valid path"
-    };
-    return await vscode.window.showInputBox(option);
-}
+import {vscode_helper} from "../src/vscode_helper";
 
 function create_hpp_buffer(name: string)
 {
@@ -207,7 +187,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	let disposable = vscode.commands.registerCommand('extension.createClass', async (args) => {
 		// The code you place here will be executed every time your command is executed
 
-		var res = await create_name_input();
+		var res = await vscode_helper.create_name_input();
 			if(!can_continue(res)) return; // check for class name
 
 			let dir :string | undefined | boolean= vscode.workspace.getConfiguration().get("cpp.creator.setPath");
@@ -230,7 +210,7 @@ export async function activate(context: vscode.ExtensionContext) {
 			}
 			else if (dir == true)
 			{
-				dir = await create_path_input(); // ask for path
+				dir = await vscode_helper.create_path_input(); // ask for path
 				if (!dir)
 				{
 					dir = vscode.workspace.rootPath as string; // if empty input, just use workspace path
