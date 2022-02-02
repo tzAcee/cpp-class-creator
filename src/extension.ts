@@ -3,7 +3,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
-import {vscode_helper} from "../src/vscode_helper";
+import {vscode_helper} from "./vscode_helper";
 
 function create_hpp_buffer(name: string)
 {
