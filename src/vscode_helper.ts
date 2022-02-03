@@ -21,4 +21,24 @@ export abstract class vscode_helper
     };
     return await vscode.window.showInputBox(option);
     }
+
+    public static can_continue(res: any)
+    {
+        if (!res)
+        {
+            vscode.window.showErrorMessage("Your Class could not be created!");
+            return false;
+        }
+        else if (res.length > 60)
+        {
+            vscode.window.showErrorMessage("Class name to long!");
+            return false;
+        }
+        else if (res.indexOf(' ') >= 0)
+        {
+            vscode.window.showErrorMessage("Class name should not have spaces!");
+            return false;
+        }
+        return true;
+    }
 }
