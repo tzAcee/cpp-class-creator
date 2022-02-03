@@ -65,44 +65,29 @@
 					"cpp.creator.headerFileContentPreset": {
 						"type":"string",
 						"editPresentation": "multilineText",
-						"default": "#ifndef {{*CLASSNAMEUPPER*}}_H\n#define {{*CLASSNAMEUPPER*}}_H\nclass {{*CLASSNAME*}}\n{\npublic:\n    {{*CLASSNAME*}}();\n    ~{{*CLASSNAME*}}();\n\nprivate:\n\n};\n#endif",
-						"description": "Content of your created header file. \nAvailable commands are:\n{{*CLASSNAME*}} - entered classname.\n{{*CLASSNAMEUPPER*}} - entered classname in upper-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters."
+						"default": "#ifndef {{*CLASSNAMEUPPER*}}_H\n#define {{*CLASSNAMEUPPER*}}_H\n\n#pragma once\n\nclass {{*CLASSNAME*}}\n{\npublic:\n    {{*CLASSNAME*}}();\n    ~{{*CLASSNAME*}}();\n\nprivate:\n\n};\n\n#endif",
+						"description": "Content of your created header file. \nAvailable commands are:\n{{*CLASSNAME*}} - entered classname.\n{{*CLASSNAMEUPPER*}} - entered classname in upper-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters.\n{{*CLASSNAMECAPI*}} - default classname with capitalized first letter.\n{{*HEADERFILENAME*}} - default headerfilename as entered in the settings. \n{{*SOURCEFILENAME*}} - default sourcefilename as entered in the settings."
 					},
 					"cpp.creator.sourceFileContentPreset": {
 						"type":"string",
 						"editPresentation": "multilineText",
-						"default": "#include \"{{*CLASSNAME*}}.hpp\"\n\n{{*CLASSNAME*}}::{{*CLASSNAME*}}()\n{\n\n}\n\n{{*CLASSNAME*}}::~{{*CLASSNAME*}}()\n{\n\n}",
-						"description":"Content of your created source file. \nAvailable commands are:\n{{*CLASSNAME*}} - entered classname.\n{{*CLASSNAMEUPPER*}} - entered classname in upper-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters."
+						"default": "#include \"{{*HEADERFILENAME*}}\"\n\n{{*CLASSNAME*}}::{{*CLASSNAME*}}()\n{\n\n}\n\n{{*CLASSNAME*}}::~{{*CLASSNAME*}}()\n{\n\n}",
+						"description":"Content of your created source file. \nAvailable commands are:\n{{*CLASSNAME*}} - entered classname.\n{{*CLASSNAMEUPPER*}} - entered classname in upper-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters.\n{{*CLASSNAMECAPI*}} - default classname with capitalized first letter.\n{{*HEADERFILENAME*}} - default headerfilename as entered in the settings. \n{{*SOURCEFILENAME*}} - default sourcefilename as entered in the settings."
+					},
+					"cpp.creator.sourceFileNamePreset": {
+						"type":"string",
+						"default": "{{*CLASSNAME*}}.cpp",
+						"description":"Name of your source file. \nAvailable commands are:\n{{*CLASSNAME*}} - entered classname.\n{{*CLASSNAMEUPPER*}} - entered classname in upper-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters."
+					},
+					"cpp.creator.headerFileNamePreset": {
+						"type":"string",
+						"default": "{{*CLASSNAME*}}.h",
+						"description":"Name of your header file. \nAvailable commands are:\n{{*CLASSNAME*}} - entered classname.\n{{*CLASSNAMEUPPER*}} - entered classname in upper-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters."
 					},
 					"cpp.creator.createFolder": {
 						"type": "boolean",
 						"default": false,
 						"description": "Create an extra folder for the class."
-					},
-					"cpp.creator.useHPPEnding": {
-						"type": "boolean",
-						"default": true,
-						"description": "Use the C++ header naming (.hpp), if set to false the extension will create .h files"
-					},
-					"cpp.creator.useCCEnding": {
-						"type": "boolean",
-						"default": true,
-						"description": "Use the C++ implementation file naming (.cc), if set to false the extension will create .cpp files"
-					},
-					"cpp.creator.headerProtection.usePragmaOnce": {
-						"type": "boolean",
-						"default": true,
-						"description": "Adds the *#pragma once* to the .hpp buffer."
-					},
-					"cpp.creator.headerProtection.useIfnDef": {
-						"type": "boolean",
-						"default": true,
-						"description": "Adds *#ifndef* to the .hpp buffer."
-					},
-					"cpp.creator.privateFirst": {
-						"type": "boolean",
-						"default": true,
-						"description": "Wheather private: should go before or after public: in the header file. If set to true private goes first."
 					}
 				}
 			}

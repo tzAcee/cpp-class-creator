@@ -1,5 +1,10 @@
 import * as fs from 'fs';
-import * as path from 'path';
+import { regex_commands } from './regex_commands';
+
+type command_replace_model = {
+    reg_expression: RegExp
+    replace_string: string
+}
 
 export class class_creator
 {
@@ -7,76 +12,63 @@ export class class_creator
     source_file_content: string = "";
     class_name: string = "";
     create_location: string = "";
-    hpp_ending = false;
-    cc_ending = false;
+    header_file: string = "";
+    source_file: string = "";
 
-    constructor(class_name: string, header_preset: string, source_file_preset: string, create_location: string) 
+    constructor(class_name: string, header_preset: string, source_file_preset: string, create_location: string, source_file_name: string, header_file_name: string) 
     {
         this.class_name = class_name;
         this.header_file_content = header_preset;
         this.source_file_content = source_file_preset;
         this.create_location = create_location;
+        this.header_file = header_file_name;
+        this.source_file = source_file_name;
         this.parse();
     }
-    get_include_name()
-    {
-        var include_name: string;
-        if (this.hpp_ending === true)
-        {
-            include_name = this.class_name + '.hpp';
-        }
-        else 
-        {
-            include_name = this.class_name + '.h';
-        }
-        
-        return include_name;
-    }
-    get_source_file_name()
-    {
-        var cpp_file_name;
-        if (this.cc_ending === true)
-        {
-            cpp_file_name = this.class_name + '.cc';
-        }
-        else {
-            cpp_file_name = this.class_name + '.cpp';
-        }
-        return cpp_file_name;
-    }
-    enable_hpp_ending()
-    {
-        this.hpp_ending = true;
-    }
-    enable_cc_ending()
-    {
-        this.cc_ending = true;
-    }
+
     parse()
     {
-        /* Current commands:
-        CLASSNAME - default classname
-        CLASSNAMEUPPER - default classname to upper
-        CLASSNAMELOWER - default classname to lower
-        */
-        var upper_class_name = this.class_name.toUpperCase();
-        var lower_class_name = this.class_name.toLocaleLowerCase();
+        var upper_regex             : RegExp = /{{\*CLASSNAMEUPPER\*}}/gi;
+        var lower_regex             : RegExp = /{{\*CLASSNAMELOWER\*}}/gi;
+        var cap_regex               : RegExp = /{{\*CLASSNAMECAPI\*}}/gi;
+        var default_regex           : RegExp = /{{\*CLASSNAME\*}}/gi;
+        var headerfilename_regex    : RegExp = /{{\*HEADERFILENAME\*}}/gi;
+        var sourcefilename_regex    : RegExp = /{{\*SOURCEFILENAME\*}}/gi;
 
-        var upper_regex = "{{\*CLASSNAMEUPPER\*}}";
-        var lower_regex = "{{\*CLASSNAMELOWER\*}}";
-        var default_regex = "{{\*CLASSNAME\*}}";
+        const file_cmds: Array<command_replace_model> = [
+            { reg_expression: upper_regex, replace_string: regex_commands.upper_case(this.class_name)},// CLASSNAMEUPPER - default classname to upper
+            { reg_expression: lower_regex, replace_string: regex_commands.lower_case(this.class_name)},// CLASSNAMELOWER - default classname to lower
+            { reg_expression: cap_regex, replace_string: regex_commands.capitalize(this.class_name)},  // CLASSNAMECAPI  - default classname with capitalized first letter
+            { reg_expression: default_regex, replace_string: regex_commands.default(this.class_name)}, // CLASSNAME      - default classname
+        ]
 
-        this.header_file_content.replace(upper_regex, upper_class_name);
-        this.header_file_content.replace(lower_regex, lower_class_name);
-        this.header_file_content.replace(default_regex, this.class_name);
+        const content_cmds: Array<command_replace_model> = [
+            { reg_expression: headerfilename_regex, replace_string: regex_commands.header_file(this.header_file)}, // HEADERFILENAME - default headerfilename as entered in settings
+            { reg_expression: sourcefilename_regex, replace_string: regex_commands.source_file(this.source_file)}, // SOURCEFILENAME - default sourcefilename as entered in settings
+            { reg_expression: upper_regex, replace_string: regex_commands.upper_case(this.class_name)},      // CLASSNAMEUPPER - default classname to upper
+            { reg_expression: lower_regex, replace_string: regex_commands.lower_case(this.class_name)},      // CLASSNAMELOWER - default classname to lower
+            { reg_expression: cap_regex, replace_string: regex_commands.capitalize(this.class_name)},        // CLASSNAMECAPI  - default classname with capitalized first letter
+            { reg_expression: default_regex, replace_string: regex_commands.default(this.class_name)},       // CLASSNAME      - default classname
+        ]
 
-        this.source_file_content.replace("{{*CLASSNAMEUPPER*}}", upper_class_name);
-        this.source_file_content.replace("{{*CLASSNAMELOWER*}}", lower_class_name);
-        this.source_file_content.replace("{{*CLASSNAME*}}", this.class_name);
+        this.source_file = this.execute_replacement(file_cmds, this.source_file);
+        this.header_file = this.execute_replacement(file_cmds, this.header_file);
+
+        this.header_file_content = this.execute_replacement(content_cmds, this.header_file_content);
+        this.source_file_content = this.execute_replacement(content_cmds, this.source_file_content);
     }
+
+    execute_replacement(replacements: Array<command_replace_model>, execute_on: string)
+    {
+        replacements.forEach(elem => {
+            execute_on = execute_on.replace(elem.reg_expression, elem.replace_string)
+        });
+        return execute_on;
+    } 
+
     create_header_file()
     {
-        var hpp_name = this.create_location+"/"+this.get_include_name();
+        var hpp_name = this.create_location+"/"+this.header_file;
         fs.writeFile(hpp_name, this.header_file_content, function (err)
         {
             if (err) {
@@ -90,7 +82,7 @@ export class class_creator
     }
     create_source_file()
     {
-        var cpp_path_and_file_name = this.create_location+"/"+this.get_source_file_name();
+        var cpp_path_and_file_name = this.create_location+"/"+this.source_file;
         fs.writeFile(cpp_path_and_file_name, this.source_file_content, function (err)
         {
             if (err) {

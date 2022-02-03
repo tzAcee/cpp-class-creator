@@ -1,5 +1,4 @@
 import * as vscode from 'vscode';
-import { class_creator } from './class_creator';
 
 export abstract class vscode_helper
 {
@@ -41,18 +40,5 @@ export abstract class vscode_helper
             return false;
         }
         return true;
-    }
-
-    public static check_endings(class_creator: class_creator)
-    {
-        if (vscode.workspace.getConfiguration().get("cpp.creator.useCCEnding") as boolean === true)
-        {
-            class_creator.enable_cc_ending();
-        }
-
-        if (vscode.workspace.getConfiguration().get("cpp.creator.useHPPEnding") as boolean === true)
-        {
-            class_creator.enable_hpp_ending();
-        }
     }
 }
