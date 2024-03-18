@@ -34,12 +34,18 @@ export class class_creator
         var default_regex           : RegExp = /{{\*CLASSNAME\*}}/gi;
         var headerfilename_regex    : RegExp = /{{\*HEADERFILENAME\*}}/gi;
         var sourcefilename_regex    : RegExp = /{{\*SOURCEFILENAME\*}}/gi;
+        var datetime_regex          : RegExp = /{{\*CURRENTDATETIME\*}}/gi;
+        var date_regex              : RegExp = /{{\*CURRENTDATE\*}}/gi;
+        var time_regex              : RegExp = /{{\*CURRENTTIME\*}}/gi;
 
         const file_cmds: Array<command_replace_model> = [
             { reg_expression: upper_regex, replace_string: regex_commands.upper_case(this.class_name)},// CLASSNAMEUPPER - default classname to upper
             { reg_expression: lower_regex, replace_string: regex_commands.lower_case(this.class_name)},// CLASSNAMELOWER - default classname to lower
             { reg_expression: cap_regex, replace_string: regex_commands.capitalize(this.class_name)},  // CLASSNAMECAPI  - default classname with capitalized first letter
             { reg_expression: default_regex, replace_string: regex_commands.default(this.class_name)}, // CLASSNAME      - default classname
+            { reg_expression: datetime_regex, replace_string: regex_commands.current_date_time()},      // CURRENTDATETIME  - the current date and time
+            { reg_expression: date_regex, replace_string: regex_commands.current_date()},               // CURRENTDATE      - the current date
+            { reg_expression: time_regex, replace_string: regex_commands.current_time()},               // CURRENTTIME      - the current time
         ]
 
         const content_cmds: Array<command_replace_model> = [
@@ -49,6 +55,10 @@ export class class_creator
             { reg_expression: lower_regex, replace_string: regex_commands.lower_case(this.class_name)},      // CLASSNAMELOWER - default classname to lower
             { reg_expression: cap_regex, replace_string: regex_commands.capitalize(this.class_name)},        // CLASSNAMECAPI  - default classname with capitalized first letter
             { reg_expression: default_regex, replace_string: regex_commands.default(this.class_name)},       // CLASSNAME      - default classname
+            { reg_expression: datetime_regex, replace_string: regex_commands.current_date_time()},      // CURRENTDATETIME  - the current date and time
+            { reg_expression: date_regex, replace_string: regex_commands.current_date()},               // CURRENTDATE      - the current date
+            { reg_expression: time_regex, replace_string: regex_commands.current_time()},               // CURRENTTIME      - the current time
+            
         ]
 
         this.source_file = this.execute_replacement(file_cmds, this.source_file);
