@@ -98,7 +98,7 @@
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
 		"pretest": "npm run compile",
-		"test": "extest setup-and-run out/test/ui-test/*.test.js"
+		"test": "extest setup-and-run out/test/ui-test/*.test.js -s ./test-data"
 	},
 	"devDependencies": {
 		"@types/glob": "^7.1.1",
