@@ -11,7 +11,7 @@ describe('Activation test suite', () => {
   });
 
   it('Extension can be activated by "Alt+X"', async () => {
-    console.log("here");
+    console.log("here2");
     // Your test logic for Alt+X activation
   });
 
