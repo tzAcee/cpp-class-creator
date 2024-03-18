@@ -33,14 +33,12 @@ export abstract class regex_commands
     public static current_date() : string
     {
         let dateTime = new Date();
-        let date = dateTime.getDate();
         return dateTime.toLocaleDateString();
     }
 
     public static current_time() : string
     {
         let dateTime = new Date();
-        let time = dateTime.getTime();
         return dateTime.toLocaleTimeString();
     }
 

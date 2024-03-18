@@ -7,9 +7,9 @@
 	"repository": {
 		"url": "https://github.com/tzAcee/cpp-class-creator.git"
 	},
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"engines": {
-		"vscode": "^1.41.0"
+		"vscode": "^1.87.0"
 	},
 	"categories": [
 		"Other"
@@ -66,23 +66,23 @@
 						"type": "string",
 						"editPresentation": "multilineText",
 						"default": "#ifndef {{*CLASSNAMEUPPER*}}_H\n#define {{*CLASSNAMEUPPER*}}_H\n\n#pragma once\n\nclass {{*CLASSNAME*}}\n{\npublic:\n    {{*CLASSNAME*}}();\n    ~{{*CLASSNAME*}}();\n\nprivate:\n\n};\n\n#endif",
-						"description": "Content of your created header file. \nAvailable commands are:\n{{*CLASSNAME*}} - entered classname.\n{{*CLASSNAMEUPPER*}} - entered classname in upper-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters.\n{{*CLASSNAMECAPI*}} - default classname with capitalized first letter.\n{{*HEADERFILENAME*}} - default headerfilename as entered in the settings. \n{{*SOURCEFILENAME*}} - default sourcefilename as entered in the settings."
+						"description": "Content of your created header file. \nAvailable commands are:\n{{*CLASSNAME*}} - entered classname.\n{{*CLASSNAMEUPPER*}} - entered classname in upper-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters.\n{{*CLASSNAMECAPI*}} - default classname with capitalized first letter.\n{{*HEADERFILENAME*}} - default headerfilename as entered in the settings. \n{{*SOURCEFILENAME*}} - default sourcefilename as entered in the settings.\n{{*CURRENTDATETIME*}} - current date and time.\n{{*CURRENTDATE*}} - current date.\n{{*CURRENTTIME*}} - current time."
 					},
 					"cpp.creator.sourceFileContentPreset": {
 						"type": "string",
 						"editPresentation": "multilineText",
 						"default": "#include \"{{*HEADERFILENAME*}}\"\n\n{{*CLASSNAME*}}::{{*CLASSNAME*}}()\n{\n\n}\n\n{{*CLASSNAME*}}::~{{*CLASSNAME*}}()\n{\n\n}",
-						"description": "Content of your created source file. \nAvailable commands are:\n{{*CLASSNAME*}} - entered classname.\n{{*CLASSNAMEUPPER*}} - entered classname in upper-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters.\n{{*CLASSNAMECAPI*}} - default classname with capitalized first letter.\n{{*HEADERFILENAME*}} - default headerfilename as entered in the settings. \n{{*SOURCEFILENAME*}} - default sourcefilename as entered in the settings."
+						"description": "Content of your created source file. \nAvailable commands are:\n{{*CLASSNAME*}} - entered classname.\n{{*CLASSNAMEUPPER*}} - entered classname in upper-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters.\n{{*CLASSNAMECAPI*}} - default classname with capitalized first letter.\n{{*HEADERFILENAME*}} - default headerfilename as entered in the settings. \n{{*SOURCEFILENAME*}} - default sourcefilename as entered in the settings.\n{{*CURRENTDATETIME*}} - current date and time.\n{{*CURRENTDATE*}} - current date.\n{{*CURRENTTIME*}} - current time."
 					},
 					"cpp.creator.sourceFileNamePreset": {
 						"type": "string",
 						"default": "{{*CLASSNAME*}}.cpp",
-						"description": "Name of your source file. \nAvailable commands are:\n{{*CLASSNAME*}} - entered classname.\n{{*CLASSNAMEUPPER*}} - entered classname in upper-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters."
+						"description": "Name of your source file. \nAvailable commands are:\n{{*CLASSNAME*}} - entered classname.\n{{*CLASSNAMEUPPER*}} - entered classname in upper-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters.\n{{*CURRENTDATETIME*}} - current date and time.\n{{*CURRENTDATE*}} - current date.\n{{*CURRENTTIME*}} - current time."
 					},
 					"cpp.creator.headerFileNamePreset": {
 						"type": "string",
 						"default": "{{*CLASSNAME*}}.h",
-						"description": "Name of your header file. \nAvailable commands are:\n{{*CLASSNAME*}} - entered classname.\n{{*CLASSNAMEUPPER*}} - entered classname in upper-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters."
+						"description": "Name of your header file. \nAvailable commands are:\n{{*CLASSNAME*}} - entered classname.\n{{*CLASSNAMEUPPER*}} - entered classname in upper-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters.\n{{*CURRENTDATETIME*}} - current date and time.\n{{*CURRENTDATE*}} - current date.\n{{*CURRENTTIME*}} - current time."
 					},
 					"cpp.creator.createFolder": {
 						"type": "boolean",
@@ -104,11 +104,10 @@
 		"@types/glob": "^7.1.1",
 		"@types/mocha": "^5.2.7",
 		"@types/node": "^12.12.22",
-		"@types/vscode": "^1.41.0",
+		"@types/vscode": "^1.87.0",
 		"glob": "^7.1.5",
-		"mocha": "^6.2.2",
-		"tslint": "^5.20.0",
-		"typescript": "^3.6.4",
+		"mocha": "^10.3.0",
+		"typescript": "^5.4.2",
 		"vscode-test": "^1.2.2"
 	}
 }
