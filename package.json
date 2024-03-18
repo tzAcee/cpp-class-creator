@@ -98,7 +98,7 @@
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
 		"pretest": "npm run compile",
-		"test": "node ./out/test/runTest.js"
+		"test": "extest setup-and-run out/test/ui-test/*.test.js"
 	},
 	"devDependencies": {
 		"@types/glob": "^7.1.1",
@@ -108,6 +108,7 @@
 		"glob": "^7.1.5",
 		"mocha": "^10.3.0",
 		"typescript": "^5.4.2",
+		"vscode-extension-tester": "^7.2.0",
 		"vscode-test": "^1.2.2"
 	}
 }
