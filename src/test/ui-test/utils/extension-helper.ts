@@ -4,6 +4,7 @@ import { ActivityBar, InputBox, Key, TreeItem, VSBrowser, Workbench } from "vsco
 import * as path from "path";
 import * as fs from "fs";
 import * as assert from "assert";
+import { until } from "./util";
 
 export class CppCreatorExtHelper
 {
@@ -68,10 +69,25 @@ export class CppCreatorExtHelper
 
         await clickableItem.expand()
 
-        let clickableChildItem = await clickableItem.findChildItem(path.basename(childPath));
+        let clickableChildItem: TreeItem | undefined = undefined;
+        await until(async ()=>{
+            try
+            {
+                const childItem = await clickableItem.findChildItem(path.basename(childPath));
+                assert(childItem != undefined);
+                clickableChildItem = childItem;
+                return true;
+            }
+            catch(e)
+            {
+                return false;
+            }
+
+        }, 2000);
+
         assert(clickableChildItem != undefined);
 
-        const explorerMenu = await clickableChildItem.openContextMenu();
+        const explorerMenu = await (clickableChildItem as TreeItem).openContextMenu();
         const createElem = await explorerMenu.getItem("Create C++ Class");
         assert(createElem != undefined);
         

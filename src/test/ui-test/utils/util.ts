@@ -2,8 +2,8 @@ export async function until(conditionFunction: any, timeout: any) {
     return new Promise((resolve, reject) => {
         const startTime = Date.now();
         
-        const poll = () => {
-            if (conditionFunction()) {
+        const poll = async () => {
+            if (await conditionFunction()) {
                 resolve("");
             } else {
                 const elapsedTime = Date.now() - startTime;
