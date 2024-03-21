@@ -6,14 +6,14 @@ export class VSController
 {
     async openWorkspace(pathWs: string)
     {
-       /* // check if workspace is already open
+        // check if workspace is already open
         const titleBarTitle = (await new TitleBar().getTitle());
         console.log(titleBarTitle)
-        if(titleBarTitle.includes(path.dirname(pathWs)))
+        if(titleBarTitle.includes("Untitled (Workspace)"))
         {
             console.warn(`ws ${pathWs} is already open.`);
             return;
-        }*/
+        }
 
         if(!fs.existsSync(pathWs))
         {
@@ -39,7 +39,6 @@ export class VSController
         const titles = await editorView.getOpenEditorTitles();
         const untitledEditor = titles.find((title)=>title.startsWith("Untitled-"));
         assert(untitledEditor != undefined);
-        const editor = await new EditorView().openEditor(untitledEditor as string);
-        await editor.wait();
+        await new EditorView().openEditor(untitledEditor as string);
     }
 }
