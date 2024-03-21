@@ -1,5 +1,5 @@
 import * as assert from "assert";
-import { Workbench } from "vscode-extension-tester";
+import { EditorView, LinkSetting, Workbench, TextEditor } from "vscode-extension-tester";
 
 export class ExtensionSettings
 {
@@ -91,16 +91,51 @@ export class ExtensionSettings
     async isSetPath() : Promise<boolean | undefined | string>
     {
         const settingsEditor = await new Workbench().openSettings();
-        const setting = await settingsEditor.findSettingByID("cpp.creator.setPath");
+        const setting = await settingsEditor.findSettingByID("cpp.creator.setPath") as LinkSetting;
         assert(setting != undefined);
-        return await setting.getValue() as boolean | undefined | string;
+        await setting.openLink();
+
+        // get editor text
+        let settingsJsonEditor = await new EditorView().openEditor("settings.json") as TextEditor;
+        let settingsJsonText = await settingsJsonEditor.getText();
+
+        // parse json
+        let settingsJson = JSON.parse(settingsJsonText);
+
+        // get json value
+
+        if(settingsJson["cpp.creator.setPath"] == "")
+        {
+            settingsJson["cpp.creator.setPath"] = undefined;
+            await settingsJsonEditor.setText(JSON.stringify(settingsJson, null, 2));
+            if(await settingsJsonEditor.isDirty())
+                await settingsJsonEditor.save();
+            
+            return undefined;
+        }
+
+        return settingsJson["cpp.creator.setPath"] as boolean | string;
     }
 
-    async setSetPath(val: boolean | string)
+    async setSetPath(val: boolean | string | undefined)
     {
         const settingsEditor = await new Workbench().openSettings();
-        const setting = await settingsEditor.findSettingByID("cpp.creator.setPath");
+        const setting = await settingsEditor.findSettingByID("cpp.creator.setPath") as LinkSetting;
         assert(setting != undefined);
-        await setting.setValue(val);
+        await setting.openLink();
+
+        // get editor text
+        let settingsJsonEditor = await new EditorView().openEditor("settings.json") as TextEditor;
+        let settingsJsonText = await settingsJsonEditor.getText();
+
+        // parse json
+        let settingsJson = JSON.parse(settingsJsonText);
+
+        // set json value
+        settingsJson["cpp.creator.setPath"] = val;
+
+        await settingsJsonEditor.setText(JSON.stringify(settingsJson, null, 2));
+        if(await settingsJsonEditor.isDirty())
+            await settingsJsonEditor.save();
     }
 }

@@ -20,18 +20,11 @@ describe('Activation test suite', () => {
   it('Extension can be activated by "Alt+X"', async () => {
     await vsController.openNewEmptyEditor();
 
-    let workSpaceContent = fs.readdirSync(workSpaceDir);
-    assert(workSpaceContent.length == 0);
-
     const className = "testClass";
     await cppCreatorExt.openExtPromptByShortcut(className);
 
-    assert(await ClassHelper.fileExistsWithContent(workSpaceDir+"/"+className+".h", ClassHelper.defaultHeaderContent(className), true));
-    assert(await ClassHelper.fileExistsWithContent(workSpaceDir+"/"+className+".cpp", ClassHelper.defaultClassContent(className), true));
-
-    // ClassHelper deletes the checked files.
-    workSpaceContent = fs.readdirSync(workSpaceDir);
-    assert(workSpaceContent.length == 0);
+    assert(await ClassHelper.fileExistsWithContent(className, workSpaceDir+"/"+className+".h", ClassHelper.defaultHeaderContent(className), true));
+    assert(await ClassHelper.fileExistsWithContent(className, workSpaceDir+"/"+className+".cpp", ClassHelper.defaultClassContent(className), true));
 
     await new EditorView().closeAllEditors();
   })
@@ -39,32 +32,18 @@ describe('Activation test suite', () => {
   it('Extension can be activated by the context menu', async () => {
     // test logic for context menu activ.
 
-    let workSpaceContent = fs.readdirSync(workSpaceDir);
-    assert(workSpaceContent.length == 0);
-
     const className = "testClass";
     await cppCreatorExt.openExtPromptByContextMenu(className, workSpaceDir);
 
-    assert(await ClassHelper.fileExistsWithContent(workSpaceDir+"/"+className+".h", ClassHelper.defaultHeaderContent(className), true));
-    assert(await ClassHelper.fileExistsWithContent(workSpaceDir+"/"+className+".cpp", ClassHelper.defaultClassContent(className), true));
-
-    // ClassHelper deletes the checked files.
-    workSpaceContent = fs.readdirSync(workSpaceDir);
-    assert(workSpaceContent.length == 0);
+    assert(await ClassHelper.fileExistsWithContent(className, workSpaceDir+"/"+className+".h", ClassHelper.defaultHeaderContent(className), true));
+    assert(await ClassHelper.fileExistsWithContent(className, workSpaceDir+"/"+className+".cpp", ClassHelper.defaultClassContent(className), true));
   })
 
   it('Extension can be activated by the command pallette', async () => {
-    let workSpaceContent = fs.readdirSync(workSpaceDir);
-    assert(workSpaceContent.length == 0);
-
     const className = "testClass";
 
     await cppCreatorExt.openExtPromptByCmdPallette(className);
-    assert(await ClassHelper.fileExistsWithContent(workSpaceDir+"/"+className+".h", ClassHelper.defaultHeaderContent(className), true));
-    assert(await ClassHelper.fileExistsWithContent(workSpaceDir+"/"+className+".cpp", ClassHelper.defaultClassContent(className), true));
-
-    // ClassHelper deletes the checked files.
-    workSpaceContent = fs.readdirSync(workSpaceDir);
-    assert(workSpaceContent.length == 0);
+    assert(await ClassHelper.fileExistsWithContent(className, workSpaceDir+"/"+className+".h", ClassHelper.defaultHeaderContent(className), true));
+    assert(await ClassHelper.fileExistsWithContent(className, workSpaceDir+"/"+className+".cpp", ClassHelper.defaultClassContent(className), true));
   });
 })

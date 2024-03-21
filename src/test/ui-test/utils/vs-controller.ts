@@ -1,4 +1,4 @@
-import { Workbench, TitleBar, InputBox, VSBrowser, Key, EditorView } from 'vscode-extension-tester'; 
+import { Workbench, TitleBar, InputBox, VSBrowser, Key, EditorView, Notification } from 'vscode-extension-tester'; 
 import * as fs from "fs";
 import * as assert from "assert";
 
@@ -39,5 +39,20 @@ export class VSController
         const untitledEditor = titles.find((title)=>title.startsWith("Untitled-"));
         assert(untitledEditor != undefined);
         await new EditorView().openEditor(untitledEditor as string);
+    }
+
+    static async isNotificationSent(text: string)
+    {
+        const notifications = await new Workbench().getNotifications();
+
+        for(let notif of notifications)
+        {
+            if(await notif.getMessage() == text)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
