@@ -54,7 +54,6 @@ describe('Activation test suite', () => {
   })
 
   it('Extension can be activated by the command pallette', async () => {
-
     let workSpaceContent = fs.readdirSync(workSpaceDir);
     assert(workSpaceContent.length == 0);
 

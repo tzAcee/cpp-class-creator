@@ -8,7 +8,6 @@ export class VSController
     {
         // check if workspace is already open
         const titleBarTitle = (await new TitleBar().getTitle());
-        console.log(titleBarTitle)
         if(titleBarTitle.includes("Untitled (Workspace)"))
         {
             console.warn(`ws ${pathWs} is already open.`);
