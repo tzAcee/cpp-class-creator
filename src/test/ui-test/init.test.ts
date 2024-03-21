@@ -1,4 +1,4 @@
-import { assert } from 'console';
+import * as assert from "assert";
 import { VSBrowser, WebDriver } from 'vscode-extension-tester';
 
 describe('Init test suite', () => {
@@ -14,4 +14,4 @@ describe('Init test suite', () => {
     const title = await driver.getTitle();
     assert(title != "");
   });
-});
+})

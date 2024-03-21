@@ -19,16 +19,13 @@
 			"preLaunchTask": "${defaultBuildTask}"
 		},
 		{
-			"name": "Extension Tests",
-			"type": "extensionHost",
+			"name": "Run Tests",
+			"type": "node",
 			"request": "launch",
-			"runtimeExecutable": "${execPath}",
+			"program": "${workspaceFolder}/node_modules/.bin/extest",
 			"args": [
-				"--extensionDevelopmentPath=${workspaceFolder}",
-				"--extensionTestsPath=${workspaceFolder}/out/test/suite/index"
-			],
-			"outFiles": [
-				"${workspaceFolder}/out/test/**/*.js"
+				"setup-and-run",
+				"out/test/ui-test/*.test.js -m ./mocharc.js"
 			],
 			"preLaunchTask": "${defaultBuildTask}"
 		}
