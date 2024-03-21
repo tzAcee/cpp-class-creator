@@ -11,7 +11,13 @@ export class ClassHelper
             return false;
         }
 
-        const fileContent = fs.readFileSync(path).toString();
+        let fileContent = "";
+
+        await until(()=>{
+            fileContent = fs.readFileSync(path).toString();
+            return fileContent != "";
+        }, 2000); 
+        
         if(fileContent != content)
         {
             console.error(`contents are not equal.`);
