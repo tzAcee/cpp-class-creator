@@ -7,16 +7,22 @@ import { VSController } from "./vs-controller";
 
 export class ClassHelper
 {
-    static async fileExistsWithContent(className: string, path: string, content: string, deleteAfterwards: boolean)
+    static async fileExists(path: string)
     {
-        assert(content != "");
-
         if(await until(()=>fs.existsSync(path), 1000))
         {
             console.error(`${path} does not exist.`)
             return false;
         }
         assert(fs.existsSync(path));
+        return true;
+    }
+
+    static async fileExistsWithContent(className: string, path: string, content: string, deleteAfterwards: boolean)
+    {
+        assert(content != "");
+
+        assert(await this.fileExists(path));
 
         let fileContent = "";
 

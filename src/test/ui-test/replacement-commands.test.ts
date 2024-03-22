@@ -5,6 +5,7 @@ import { ClassHelper } from './utils/class-helper';
 import * as assert from "assert";
 import * as fs from "fs";
 import { ExtensionSettings } from './utils/extension-settings-helper';
+import { isDirectory } from './utils/util';
 
 describe('Text teplacement test suite', () => {
     const workSpaceDir = "/tmp/cppWs";
@@ -25,8 +26,6 @@ describe('Text teplacement test suite', () => {
     defaultSourceContentPreset = await ext_settings.getSourceFileContentPreset();
     defaultHeaderContentPreset = await ext_settings.getHeaderFileContentPreset();
     assert (defaultHeaderContentPreset != "" && defaultHeaderFileNamePreset != "" && defaultSourceContentPreset != "" && defaultSourceFileNamePreset != "");
-
-    await ext_settings.setSourceFileContentPreset("test");
   });
 
   after(async ()=>{
@@ -36,12 +35,32 @@ describe('Text teplacement test suite', () => {
     await ext_settings.setHeaderFileNamePreset(defaultHeaderFileNamePreset);
   })
 
+  afterEach(async ()=>{
+    // just delete the directory
+    let dirContents = fs.readdirSync(workSpaceDir);
+    for(let contentPath of dirContents)
+    {
+      if(!await isDirectory(contentPath))
+      {
+        fs.unlinkSync(contentPath);
+      }
+    }
+
+  })
+
   beforeEach(async ()=>{
   })
 
     // header file name tests:
     it('[header file name] - CLASSNAMEUPPER multiple', async () => {
 
+      await ext_settings.setHeaderFileNamePreset("{{*CLASSNAMEUPPER*}}.h");
+      const className = "testClass";
+
+      await cppCreatorExt.openExtPromptByCmdPallette(className);
+
+      const path = workSpaceDir + "/" + className.toUpperCase() + ".h";
+      assert(await ClassHelper.fileExists(path));
     })
 
     it('[header file name] - CLASSNAMEUPPER once', async () => {
