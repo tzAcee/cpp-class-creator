@@ -71,9 +71,10 @@ export class CppCreatorExtHelper
 
         await wsExplorer.expand();
         assert(fs.existsSync(childPath))
+        await wsExplorer.click();
         const refreshAction =  await wsExplorer.getAction("Refresh Explorer");
         assert(refreshAction != undefined);
-        await refreshAction?.click();
+        await refreshAction.click();
         console.log(await VSBrowser.instance.driver.takeScreenshot())
 
         const wsName = path.basename(wsPath);
