@@ -17,10 +17,11 @@ describe('Text teplacement test suite', () => {
   });
 
   after(async ()=>{
+    await ext_settings.resetPreset();
   })
 
   beforeEach(async ()=>{
-    await ext_settings.resetSourceFileNamePreset();
+    await ext_settings.resetPreset();
   })
 
   it('Test', async () => {

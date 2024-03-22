@@ -3,6 +3,14 @@ import { EditorView, LinkSetting, Workbench, TextEditor, Setting } from "vscode-
 
 export class ExtensionSettings
 {
+    async resetPreset()
+    {
+        await this.resetHeaderFileNamePreset();
+        await this.resetSourceFileContentPreset();
+        await this.resetSourceFileNamePreset();
+        await this.resetHeaderFileContentPreset();
+    }
+
     async getSettingById(id: string): Promise<Setting>
     {
         const settingsEditor = await new Workbench().openSettings();
@@ -106,7 +114,8 @@ export class ExtensionSettings
         const setting = await this.getSettingById("cpp.creator.sourceFileNamePreset");
         await setting.click();
 
-        console.log(await setting.takeScreenshot())
+        console.log("here");
+        console.log(await setting.getDriver().getPageSource())
     }
 
     // SetPath
