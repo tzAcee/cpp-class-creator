@@ -1,5 +1,5 @@
 import { VSController } from './utils/vs-controller';
-import { EditorView, Key, VSBrowser } from 'vscode-extension-tester';
+import { EditorView } from 'vscode-extension-tester';
 import { CppCreatorExtHelper } from './utils/extension-helper';
 import { ClassHelper } from './utils/class-helper';
 import * as assert from "assert";

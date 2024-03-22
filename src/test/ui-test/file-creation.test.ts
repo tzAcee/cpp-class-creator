@@ -24,7 +24,7 @@ describe('Creation test suite', () => {
         await ext_settings.setCreateFolder(false);
     });
 
-/*     it("Don't create new folder if 'Create Folder' is false", async ()=>{
+     it("Don't create new folder if 'Create Folder' is false", async ()=>{
         assert(await ext_settings.isCreateFolderEnabled() == false)
     
         const className = "testClass";
@@ -111,7 +111,7 @@ describe('Creation test suite', () => {
         // ClassHelper deletes the checked files.
         let newWorkSpaceContent = fs.readdirSync(newPath);
         assert(newWorkSpaceContent.length == 0);   
-    }); */
+    }); 
 
     it("'SetPath' is overriden by context-menu location", async()=>{
         await ext_settings.setSetPath(true)
@@ -127,7 +127,7 @@ describe('Creation test suite', () => {
         assert(newWorkSpaceContent.length == 0);   
     });
 
-/*     it("Combine 'createFolder' with 'setPath' ('createFolder' ignored)", async()=>{
+    it("Combine 'createFolder' with 'setPath' ('createFolder' ignored)", async()=>{
         await ext_settings.setCreateFolder(true)
 
         let newPath = "/tmp/newWsPath";
@@ -144,9 +144,9 @@ describe('Creation test suite', () => {
         let newWorkSpaceContent = fs.readdirSync(newPath);
         assert(newWorkSpaceContent.length == 0);   
 
-    }); */
+    });
 
-/*     it("Combine 'createFolder' with context-menu location ('createFolder' ignored)", async ()=>{
+    it("Combine 'createFolder' with context-menu location ('createFolder' ignored)", async ()=>{
         await ext_settings.setCreateFolder(true)
 
         const className = "testClass";
@@ -157,5 +157,5 @@ describe('Creation test suite', () => {
         
         let newWorkSpaceContent = fs.readdirSync(expDir);
         assert(newWorkSpaceContent.length == 0);   
-    }); */
+    });
 });
