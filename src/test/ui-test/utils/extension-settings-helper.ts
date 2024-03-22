@@ -117,13 +117,11 @@ export class ExtensionSettings
         console.log("here");
 
 
-/*         const resetElem = await setting.findElement(By.css("a.action-label"))
+        const resetElem = await setting.findElement(By.css("a.action-label"))
         assert(resetElem != undefined);
-        await resetElem.click(); */
-        await VSBrowser.instance.driver.actions().sendKeys(Key.chord(Key.SHIFT, Key.F9)).perform();
-        console.log(await VSBrowser.instance.driver.takeScreenshot())
-        console.log("settings")
-        console.log(await setting.takeScreenshot());
+        await resetElem.click(); 
+        console.log(await setting.takeScreenshot())
+
         // <a class="action-label codicon codicon-settings-more-action" />
     }
 
