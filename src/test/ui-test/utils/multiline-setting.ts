@@ -4,7 +4,6 @@ import assert = require("assert");
 import { until } from "./util";
 
 export async function createSetting(element: WebElement, title: string, category: string, settingsEditor: SettingsEditor): Promise<Setting> {
-    console.log("Creating setting");
     await element.findElement(locators.SettingsEditor.settingConstructor(title, category));
     try {
         // try a combo setting

@@ -40,9 +40,9 @@ describe('Text teplacement test suite', () => {
     let dirContents = fs.readdirSync(workSpaceDir);
     for(let contentPath of dirContents)
     {
-      if(!await isDirectory(contentPath))
+      if(!await isDirectory(workSpaceDir+"/"+contentPath))
       {
-        fs.unlinkSync(contentPath);
+        fs.unlinkSync(workSpaceDir+"/"+contentPath);
       }
     }
 
@@ -54,6 +54,16 @@ describe('Text teplacement test suite', () => {
     // header file name tests:
     it('[header file name] - CLASSNAMEUPPER multiple', async () => {
 
+      await ext_settings.setHeaderFileNamePreset("{{*CLASSNAMEUPPER*}}-{{*CLASSNAMEUPPER*}}.h");
+      const className = "testClass";
+
+      await cppCreatorExt.openExtPromptByCmdPallette(className);
+
+      const path = workSpaceDir + "/" + className.toUpperCase()+"-"+ className.toUpperCase() + ".h";
+      assert(await ClassHelper.fileExists(path));
+    })
+
+    it('[header file name] - CLASSNAMEUPPER once', async () => {
       await ext_settings.setHeaderFileNamePreset("{{*CLASSNAMEUPPER*}}.h");
       const className = "testClass";
 
@@ -61,10 +71,6 @@ describe('Text teplacement test suite', () => {
 
       const path = workSpaceDir + "/" + className.toUpperCase() + ".h";
       assert(await ClassHelper.fileExists(path));
-    })
-
-    it('[header file name] - CLASSNAMEUPPER once', async () => {
-
     })
 
     it('[header file name] - CLASSNAMECAPI once', async () => {
