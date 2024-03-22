@@ -71,7 +71,7 @@ export class CppCreatorExtHelper
         console.log(actions.length);
         for(let act of actions)
         {
-            console.log(act.getText());
+            console.log(await act.getText());
         }
 
         await wsExplorer.expand();
