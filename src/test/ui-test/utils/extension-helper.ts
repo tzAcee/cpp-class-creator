@@ -67,16 +67,15 @@ export class CppCreatorExtHelper
         const explorerContent = explorerView.getContent();
         console.log("getting explorerViewContent")
         const wsExplorer = await explorerContent.getSection("Untitled (Workspace)");
-        const actions =  await wsExplorer.getActions();
-        console.log(actions.length);
-        for(let act of actions)
-        {
-            console.log(await act.getText());
-            console.log(await act.getLabel());
-        }
+
 
         await wsExplorer.expand();
+        assert(fs.existsSync(childPath))
+        const refreshAction =  await wsExplorer.getAction("Refresh Explorer");
+        assert(refreshAction != undefined);
+        await refreshAction?.click();
         console.log(await VSBrowser.instance.driver.takeScreenshot())
+
         const wsName = path.basename(wsPath);
         let clickableItem = await wsExplorer.findItem(wsName) as TreeItem;
         assert(clickableItem != undefined);
