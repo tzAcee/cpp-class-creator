@@ -53,8 +53,9 @@ export class CppCreatorExtHelper
         const childPath = wsPath+"/"+child; 
         if(!fs.existsSync(childPath))
         {
-            console.log("creating file")
+            console.log("creating file", childPath);
             fs.mkdirSync(childPath);
+            
         }
 
 
@@ -66,6 +67,13 @@ export class CppCreatorExtHelper
         const explorerContent = explorerView.getContent();
         console.log("getting explorerViewContent")
         const wsExplorer = await explorerContent.getSection("Untitled (Workspace)");
+        const actions =  await wsExplorer.getActions();
+        console.log(actions.length);
+        for(let act of actions)
+        {
+            console.log(act.getText());
+        }
+
         await wsExplorer.expand();
 
         const wsName = path.basename(wsPath);
