@@ -75,7 +75,7 @@ export class CppCreatorExtHelper
         }
 
         await wsExplorer.expand();
-
+        console.log(await VSBrowser.instance.driver.takeScreenshot())
         const wsName = path.basename(wsPath);
         let clickableItem = await wsExplorer.findItem(wsName) as TreeItem;
         assert(clickableItem != undefined);
