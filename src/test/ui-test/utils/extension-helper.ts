@@ -78,6 +78,14 @@ export class CppCreatorExtHelper
         await until(async ()=>{
             try
             {
+                const childs = await clickableItem.getChildren();
+                console.log(childs.length);
+                for(let child of childs)
+                {
+                    console.log(await child.getText());
+                }
+                console.log("***");
+
                 const childItem = await clickableItem.findChildItem(path.basename(childPath));
                 assert(childItem != undefined);
                 clickableChildItem = childItem;
@@ -98,6 +106,8 @@ export class CppCreatorExtHelper
         assert(createElem != undefined);
         console.log("found create class")
         await createElem.click();
+
+        console.log(await VSBrowser.instance.driver.takeScreenshot())
 
         let inputBox = await new InputBox().wait();
         console.log("found InputBox")
