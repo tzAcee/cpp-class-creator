@@ -6,7 +6,7 @@ import * as assert from "assert";
 import * as fs from "fs";
 import { ExtensionSettings } from './utils/extension-settings-helper';
 
-describe('Text teplacement test suite', () => {
+describe('Text teplacement test suite', async () => {
     const workSpaceDir = "/tmp/cppWs";
     let vsController = new VSController();
     let cppCreatorExt = new CppCreatorExtHelper();
@@ -20,12 +20,13 @@ describe('Text teplacement test suite', () => {
   before(async () => {
     await vsController.openWorkspace(workSpaceDir);
 
-    defaultHeaderFileNamePreset = await ext_settings.getHeaderFileContentPreset();
-    defaultSourceFileNamePreset = await ext_settings.getSourceFileContentPreset();
+    defaultHeaderFileNamePreset = await ext_settings.getHeaderFileNamePreset();
+    defaultSourceFileNamePreset = await ext_settings.getSourceFileNamePreset();
     defaultSourceContentPreset = await ext_settings.getSourceFileContentPreset();
     defaultHeaderContentPreset = await ext_settings.getHeaderFileContentPreset();
-
     assert (defaultHeaderContentPreset != "" && defaultHeaderFileNamePreset != "" && defaultSourceContentPreset != "" && defaultSourceFileNamePreset != "");
+
+    await ext_settings.setSourceFileContentPreset("test");
   });
 
   after(async ()=>{

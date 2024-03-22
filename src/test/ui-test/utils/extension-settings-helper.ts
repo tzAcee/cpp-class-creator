@@ -1,5 +1,6 @@
 import * as assert from "assert";
-import { EditorView, LinkSetting, Workbench, TextEditor, Setting, By, VSBrowser, Key } from "vscode-extension-tester";
+import { EditorView, LinkSetting, Workbench, TextEditor, Setting } from "vscode-extension-tester";
+import { getMultiLineSettingById } from "./multiline-setting";
 
 export class ExtensionSettings
 {
@@ -29,14 +30,14 @@ export class ExtensionSettings
     // HeaderFileContentPreset
     async getHeaderFileContentPreset() : Promise<string>
     {
-        const setting = await this.getSettingById("cpp.creator.headerFileContentPreset");
+        const setting = await getMultiLineSettingById("cpp.creator.headerFileContentPreset");
 
         return (await setting.getValue() as string);
     }
 
     async setHeaderFileContentPreset(val: string)
     {
-        const setting = await this.getSettingById("cpp.creator.headerFileContentPreset");
+        const setting = await getMultiLineSettingById("cpp.creator.headerFileContentPreset");
 
         await setting.setValue(val);
     }
@@ -44,14 +45,14 @@ export class ExtensionSettings
     // SourceFileContentPreset
     async getSourceFileContentPreset() : Promise<string>
     {
-        const setting = await this.getSettingById("cpp.creator.sourceFileContentPreset");
+        const setting = await getMultiLineSettingById("cpp.creator.sourceFileContentPreset");
 
         return (await setting.getValue() as string);
     }
 
     async setSourceFileContentPreset(val: string)
     {
-        const setting = await this.getSettingById("cpp.creator.sourceFileContentPreset");
+        const setting = await getMultiLineSettingById("cpp.creator.sourceFileContentPreset");
 
         await setting.setValue(val)
     }

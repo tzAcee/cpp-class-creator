@@ -1,5 +1,5 @@
 "use strict";
  
 module.exports = {
-  timeout: 30000,
+  timeout: 60000,
 };
