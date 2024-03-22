@@ -99,8 +99,6 @@ export class CppCreatorExtHelper
         assert(createElem != undefined);
         await createElem.click();
 
-        console.log(await VSBrowser.instance.driver.takeScreenshot())
-
         let inputBox = await new InputBox().wait();
         await inputBox.setText(classNamePrompt);
         await inputBox.confirm();

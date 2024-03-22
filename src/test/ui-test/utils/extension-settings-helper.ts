@@ -5,10 +5,10 @@ export class ExtensionSettings
 {
     async resetPreset()
     {
-        await this.resetHeaderFileNamePreset();
-        await this.resetSourceFileContentPreset();
-        await this.resetSourceFileNamePreset();
-        await this.resetHeaderFileContentPreset();
+    //    await this.resetHeaderFileNamePreset();
+       // await this.resetSourceFileContentPreset();
+       await this.resetSourceFileNamePreset();
+    //    await this.resetHeaderFileContentPreset();
     }
 
     async getSettingById(id: string): Promise<Setting>
