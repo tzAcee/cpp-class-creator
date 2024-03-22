@@ -52,21 +52,26 @@ export class CppCreatorExtHelper
         // create child-entry first
         const childPath = wsPath+"/"+child; 
         if(!fs.existsSync(childPath))
+        {
+            console.log("creating file")
             fs.mkdirSync(childPath);
+        }
+
 
         const explorer = await new ActivityBar().getViewControl("Explorer");
         assert(explorer != undefined);
+        console.log("getting explorer")
         const explorerView = await explorer.openView();
-
+        console.log("getting explorerView")
         const explorerContent = explorerView.getContent();
-
+        console.log("getting explorerViewContent")
         const wsExplorer = await explorerContent.getSection("Untitled (Workspace)");
         await wsExplorer.expand();
 
         const wsName = path.basename(wsPath);
         let clickableItem = await wsExplorer.findItem(wsName) as TreeItem;
         assert(clickableItem != undefined);
-
+        console.log("found ws entry")
         await clickableItem.expand()
 
         let clickableChildItem: TreeItem | undefined = undefined;
@@ -86,14 +91,16 @@ export class CppCreatorExtHelper
         }, 2000);
 
         assert(clickableChildItem != undefined);
-
+        console.log("found child entry")
         const explorerMenu = await (clickableChildItem as TreeItem).openContextMenu();
+        console.log("found context menu of child entry")
         const createElem = await explorerMenu.getItem("Create C++ Class");
         assert(createElem != undefined);
-        
+        console.log("found create class")
         await createElem.click();
 
         let inputBox = await new InputBox().wait();
+        console.log("found InputBox")
         await inputBox.setText(classNamePrompt);
         await inputBox.confirm();
     }
