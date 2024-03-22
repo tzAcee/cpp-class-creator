@@ -17,6 +17,8 @@ describe('Negative-cases test suite', () => {
   });
 
   after(async ()=>{
+    await ext_settings.setSetPath(undefined);
+    await ext_settings.setCreateFolder(false);
   })
 
   beforeEach(async ()=>{

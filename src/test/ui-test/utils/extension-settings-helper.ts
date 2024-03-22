@@ -3,14 +3,6 @@ import { EditorView, LinkSetting, Workbench, TextEditor, Setting, By, VSBrowser,
 
 export class ExtensionSettings
 {
-    async resetPreset()
-    {
-    //    await this.resetHeaderFileNamePreset();
-       // await this.resetSourceFileContentPreset();
-       await this.resetSourceFileNamePreset();
-    //    await this.resetHeaderFileContentPreset();
-    }
-
     async getSettingById(id: string): Promise<Setting>
     {
         const settingsEditor = await new Workbench().openSettings();
@@ -49,11 +41,6 @@ export class ExtensionSettings
         await setting.setValue(val);
     }
 
-    async resetHeaderFileContentPreset()
-    {
-        const setting = await this.getSettingById("cpp.creator.headerFileContentPreset");
-    }
-
     // SourceFileContentPreset
     async getSourceFileContentPreset() : Promise<string>
     {
@@ -67,11 +54,6 @@ export class ExtensionSettings
         const setting = await this.getSettingById("cpp.creator.sourceFileContentPreset");
 
         await setting.setValue(val)
-    }
-
-    async resetSourceFileContentPreset()
-    {
-        const setting = await this.getSettingById("cpp.creator.sourceFileContentPreset");
     }
 
     // HeaderFileNamePreset
@@ -89,11 +71,6 @@ export class ExtensionSettings
         await setting.setValue(val)
     }
 
-    async resetHeaderFileNamePreset()
-    {
-        const setting = await this.getSettingById("cpp.creator.headerFileNamePreset");
-    }
-
     // SourceFileNamePreset
     async getSourceFileNamePreset() : Promise<string>
     {
@@ -107,28 +84,6 @@ export class ExtensionSettings
         const setting = await this.getSettingById("cpp.creator.sourceFileNamePreset");
 
         await setting.setValue(val)
-    }
-
-    async resetSourceFileNamePreset()
-    {
-        const setting = await this.getSettingById("cpp.creator.sourceFileNamePreset");
-        await setting.click();
-
-        console.log("here");
-
-        // Open the drop down
-        const resetElem = await setting.findElement(By.css("a.action-label"))
-        assert(resetElem != undefined);
-        await resetElem.click(); 
-
-        // find the Reset Setting Button
-        const resetSettingButton = await setting.findElement(By.xpath("//*[contains(text(), 'Reset Setting')]"));
-        assert(resetSettingButton != undefined);
-        await resetSettingButton.click();
-
-        console.log(await setting.takeScreenshot())
-
-        // <a class="action-label codicon codicon-settings-more-action" />
     }
 
     // SetPath
