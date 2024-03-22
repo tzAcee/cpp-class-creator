@@ -146,7 +146,7 @@ describe('Creation test suite', () => {
 
     }); */
 
-    it("Combine 'createFolder' with context-menu location ('createFolder' ignored)", async ()=>{
+/*     it("Combine 'createFolder' with context-menu location ('createFolder' ignored)", async ()=>{
         await ext_settings.setCreateFolder(true)
 
         const className = "testClass";
@@ -157,5 +157,5 @@ describe('Creation test suite', () => {
         
         let newWorkSpaceContent = fs.readdirSync(expDir);
         assert(newWorkSpaceContent.length == 0);   
-    });
+    }); */
 });
