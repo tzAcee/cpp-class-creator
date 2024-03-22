@@ -116,10 +116,16 @@ export class ExtensionSettings
 
         console.log("here");
 
-
+        // Open the drop down
         const resetElem = await setting.findElement(By.css("a.action-label"))
         assert(resetElem != undefined);
         await resetElem.click(); 
+
+        // find the Reset Setting Button
+        const resetSettingButton = await setting.findElement(By.xpath("//*[contains(text(), 'Reset Setting')]"));
+        assert(resetSettingButton != undefined);
+        await resetSettingButton.click();
+
         console.log(await setting.takeScreenshot())
 
         // <a class="action-label codicon codicon-settings-more-action" />
