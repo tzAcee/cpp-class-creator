@@ -1,5 +1,5 @@
 import * as assert from "assert";
-import { EditorView, LinkSetting, Workbench, TextEditor, Setting } from "vscode-extension-tester";
+import { EditorView, LinkSetting, Workbench, TextEditor, Setting, By, VSBrowser } from "vscode-extension-tester";
 
 export class ExtensionSettings
 {
@@ -115,7 +115,13 @@ export class ExtensionSettings
         await setting.click();
 
         console.log("here");
-        console.log(await setting.getDriver().getPageSource())
+
+
+        const resetElem = await setting.findElement(By.css("a.action-label"))
+        assert(resetElem != undefined);
+        await resetElem.click();
+        console.log(await VSBrowser.instance.driver.takeScreenshot())
+        // <a class="action-label codicon codicon-settings-more-action" />
     }
 
     // SetPath
