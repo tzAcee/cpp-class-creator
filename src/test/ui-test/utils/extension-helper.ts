@@ -72,6 +72,7 @@ export class CppCreatorExtHelper
         for(let act of actions)
         {
             console.log(await act.getText());
+            console.log(await act.getLabel());
         }
 
         await wsExplorer.expand();
@@ -91,6 +92,7 @@ export class CppCreatorExtHelper
                 for(let child of childs)
                 {
                     console.log(await child.getText());
+                    console.log(await child.getLabel());
                 }
                 console.log("***");
 
