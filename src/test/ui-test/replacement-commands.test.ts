@@ -6,7 +6,7 @@ import * as assert from "assert";
 import * as fs from "fs";
 import { ExtensionSettings } from './utils/extension-settings-helper';
 
-describe('Text teplacement test suite', async () => {
+describe('Text teplacement test suite', () => {
     const workSpaceDir = "/tmp/cppWs";
     let vsController = new VSController();
     let cppCreatorExt = new CppCreatorExtHelper();
