@@ -100,7 +100,8 @@
 		"pretest": "npm run compile",
 		"test": "extest setup-and-run out/test/ui-test/*.test.js -m ./mocharc.js",
 		"test:file-name-replacement": "extest setup-and-run out/test/ui-test/file-name-replacement.test.js -m ./mocharc.js",
-		"test:file-content-replacement": "extest setup-and-run out/test/ui-test/file-content-replacement.test.js -m ./mocharc.js"
+		"test:file-content-replacement": "extest setup-and-run out/test/ui-test/file-content-replacement.test.js -m ./mocharc.js",
+		"test:negative": "extest setup-and-run out/test/ui-test/negative.test.js -m ./mocharc.js"
 	},
 	"devDependencies": {
 		"@types/glob": "^7.1.1",

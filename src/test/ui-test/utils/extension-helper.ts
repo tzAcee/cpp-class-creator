@@ -130,4 +130,30 @@ export class CppCreatorExtHelper
         }
 
     }
+
+    async openPromptSendESC(classNamePrompt: string)
+    {
+        await new Workbench().executeCommand("Create C++ Class");
+
+        let inputBox = await new InputBox().wait();
+        await inputBox.setText(classNamePrompt);
+        await VSBrowser.instance.driver.actions().sendKeys(Key.ESCAPE).perform();
+    }
+
+    async openPromptSendESCToPath(classNamePrompt: string, pathPrompt: string)
+    {
+        await new Workbench().executeCommand("Create C++ Class");
+
+        {
+            let inputBox = await new InputBox().wait();
+            await inputBox.setText(classNamePrompt);
+            await inputBox.submit();
+        }
+            await VSBrowser.instance.driver.sleep(1000);
+        {
+            let inputBox = await new InputBox().wait();
+            await inputBox.setText(pathPrompt);
+            await VSBrowser.instance.driver.actions().sendKeys(Key.ESCAPE).perform();
+        }
+    }
 }
