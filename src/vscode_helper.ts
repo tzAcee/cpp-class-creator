@@ -26,7 +26,7 @@ export abstract class vscode_helper
     {
         if (!res)
         {
-            vscode.window.showErrorMessage("Your Class could not be created!");
+            vscode.window.showErrorMessage("Your class could NOT be created!");
             return false;
         }
         else if (res.length > 60)

@@ -36,11 +36,11 @@ export async function activate(context: vscode.ExtensionContext) {
 																  //Create the class there
 			if (out)
 			{
-				vscode.window.showInformationMessage('Your Class ' + res + '  has been created! \n(@'+dir_h.dir()+')');
+				vscode.window.showInformationMessage('Your class "' + res + '"  has been created! \n(@'+dir_h.dir()+')');
 			}
 			else
 			{
-				vscode.window.showErrorMessage('Your Class ' + res + '  has been not created! \n(@'+dir_h.dir()+')');
+				vscode.window.showErrorMessage('Your class "' + res + '"  has NOT been created! \n(@'+dir_h.dir()+')');
 			}
 		});
 		// Display a message box to the user
