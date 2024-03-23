@@ -1,6 +1,7 @@
 import { Workbench, TitleBar, InputBox, VSBrowser, Key, EditorView, Notification } from 'vscode-extension-tester'; 
 import * as fs from "fs";
 import * as assert from "assert";
+import { until } from './util';
 
 export class VSController
 {
@@ -45,14 +46,18 @@ export class VSController
     {
         const notifications = await new Workbench().getNotifications();
 
-        for(let notif of notifications)
-        {
-            if(await notif.getMessage() == text)
+        await until(async ()=>{
+            for(let notif of notifications)
             {
-                return true;
+                if(await notif.getMessage() == text)
+                {
+                    return true;
+                }
             }
-        }
+    
+            return false;
+        }, 2000);
 
-        return false;
+        return true;
     }
 }
