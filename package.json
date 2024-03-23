@@ -77,12 +77,12 @@
 					"cpp.creator.sourceFileNamePreset": {
 						"type": "string",
 						"default": "{{*CLASSNAME*}}.cpp",
-						"description": "Name of your source file. \nAvailable commands are:\n{{*CLASSNAME*}} - entered classname.\n{{*CLASSNAMEUPPER*}} - entered classname in upper-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters.\n{{*CURRENTDATETIME*}} - current date and time.\n{{*CURRENTDATE*}} - current date.\n{{*CURRENTTIME*}} - current time."
+						"description": "Name of your source file. \nAvailable commands are:\n{{*CLASSNAME*}} - entered classname.\n{{*CLASSNAMEUPPER*}} - entered classname in upper-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters."
 					},
 					"cpp.creator.headerFileNamePreset": {
 						"type": "string",
 						"default": "{{*CLASSNAME*}}.h",
-						"description": "Name of your header file. \nAvailable commands are:\n{{*CLASSNAME*}} - entered classname.\n{{*CLASSNAMEUPPER*}} - entered classname in upper-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters.\n{{*CURRENTDATETIME*}} - current date and time.\n{{*CURRENTDATE*}} - current date.\n{{*CURRENTTIME*}} - current time."
+						"description": "Name of your header file. \nAvailable commands are:\n{{*CLASSNAME*}} - entered classname.\n{{*CLASSNAMEUPPER*}} - entered classname in upper-case letters.\n{{*CLASSNAMELOWER*}} - entered classname in lower-case letters."
 					},
 					"cpp.creator.createFolder": {
 						"type": "boolean",
@@ -99,7 +99,8 @@
 		"watch": "tsc -watch -p ./",
 		"pretest": "npm run compile",
 		"test": "extest setup-and-run out/test/ui-test/*.test.js -m ./mocharc.js",
-		"test:replacement": "extest setup-and-run out/test/ui-test/replacement-commands.test.js -m ./mocharc.js"
+		"test:file-name-replacement": "extest setup-and-run out/test/ui-test/file-name-replacement.test.js -m ./mocharc.js",
+		"test:file-content-replacement": "extest setup-and-run out/test/ui-test/file-content-replacement.test.js -m ./mocharc.js"
 	},
 	"devDependencies": {
 		"@types/glob": "^7.1.1",

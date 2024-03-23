@@ -21,14 +21,14 @@ export async function until(conditionFunction: any, timeout: any) {
     });
 }
 
-export async function isDirectory(path: string) {
-    return new Promise((resolve, reject) => {
-        fs.stat(path, (err: any, stats: { isDirectory: () => unknown; }) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(stats.isDirectory());
-            }
-        });
-    });
+export async function waitUntilFileWithEndingCreated(ending: string, dir: string)
+{
+  let files: string[] = [];
+  await until(()=>{
+    const wsContents = fs.readdirSync(dir)
+    files = wsContents.filter((elem: string)=> elem.endsWith(ending));
+
+    return files.length > 0;
+  }, 2000);
+  return files;
 }

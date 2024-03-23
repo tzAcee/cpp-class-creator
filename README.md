@@ -17,9 +17,6 @@ For file name presets:
 - CLASSNAMELOWER - default classname to lower
 - CLASSNAMECAPI  - default classname with capitalized first letter
 - CLASSNAME      - default classname
-- CURRENTDATETIME - current date and time
-- CURRENTDATE    - current date
-- CURRENTTIME    - current time
 
 For file content presets:
 
