@@ -18,6 +18,24 @@ export class ClassHelper
         return true;
     }
 
+    static async fileExistsGetContent(path: string, className: string)
+    {
+        assert(await this.fileExists(path));
+
+        let fileContent = "";
+
+        await until(()=>{
+            fileContent = fs.readFileSync(path).toString();
+            return fileContent != "";
+        }, 2000); 
+
+        const pathWithoutFileName = path.substring(0, path.lastIndexOf("/"));
+        const expNotif = `Your class "${className}" has been created! (@${pathWithoutFileName})`;
+        assert(await VSController.isNotificationSent(expNotif));
+
+        return fileContent;
+    }
+
     static async fileExistsWithContent(className: string, path: string, content: string, deleteAfterwards: boolean)
     {
         assert(content != "");
