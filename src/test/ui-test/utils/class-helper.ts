@@ -20,6 +20,10 @@ export class ClassHelper
 
     static async fileExistsGetContent(path: string, className: string)
     {
+        const pathWithoutFileName = path.substring(0, path.lastIndexOf("/"));
+        const expNotif = `Your class "${className}" has been created! (@${pathWithoutFileName})`;
+        assert(await VSController.isNotificationSent(expNotif));
+
         assert(await this.fileExists(path));
 
         let fileContent = "";
@@ -29,16 +33,16 @@ export class ClassHelper
             return fileContent != "";
         }, 2000); 
 
-        const pathWithoutFileName = path.substring(0, path.lastIndexOf("/"));
-        const expNotif = `Your class "${className}" has been created! (@${pathWithoutFileName})`;
-        assert(await VSController.isNotificationSent(expNotif));
-
         return fileContent;
     }
 
     static async fileExistsWithContent(className: string, path: string, content: string, deleteAfterwards: boolean)
     {
         assert(content != "");
+
+        const pathWithoutFileName = path.substring(0, path.lastIndexOf("/"));
+        const expNotif = `Your class "${className}" has been created! (@${pathWithoutFileName})`;
+        assert(await VSController.isNotificationSent(expNotif));
 
         assert(await this.fileExists(path));
 
@@ -56,10 +60,6 @@ export class ClassHelper
             console.error("exp:", content);
             return false;
         }
-
-        const pathWithoutFileName = path.substring(0, path.lastIndexOf("/"));
-        const expNotif = `Your class "${className}" has been created! (@${pathWithoutFileName})`;
-        assert(await VSController.isNotificationSent(expNotif));
 
         if(deleteAfterwards)
         {
