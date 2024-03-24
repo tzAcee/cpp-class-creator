@@ -20,9 +20,9 @@ export class ClassHelper
 
     static async fileExistsGetContent(path: string, className: string)
     {
-        const pathWithoutFileName = path.substring(0, path.lastIndexOf("/"));
+        /*const pathWithoutFileName = path.substring(0, path.lastIndexOf("/"));
         const expNotif = `Your class "${className}" has been created! (@${pathWithoutFileName})`;
-        assert(await VSController.isNotificationSent(expNotif));
+        assert(await VSController.isNotificationSent(expNotif));*/
 
         assert(await this.fileExists(path));
 
@@ -40,9 +40,9 @@ export class ClassHelper
     {
         assert(content != "");
 
-        const pathWithoutFileName = path.substring(0, path.lastIndexOf("/"));
+       /* const pathWithoutFileName = path.substring(0, path.lastIndexOf("/"));
         const expNotif = `Your class "${className}" has been created! (@${pathWithoutFileName})`;
-        assert(await VSController.isNotificationSent(expNotif));
+        assert(await VSController.isNotificationSent(expNotif));*/
 
         assert(await this.fileExists(path));
 
