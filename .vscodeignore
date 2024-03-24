@@ -3,6 +3,7 @@
 out/test/**
 src/**
 .gitignore
+mocharc.js
 vsc-extension-quickstart.md
 **/tsconfig.json
 **/tslint.json
