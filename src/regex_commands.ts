@@ -15,6 +15,11 @@ export abstract class regex_commands
         return str.toUpperCase();
     }
 
+    public static to_snake_case(str: string) 
+    {
+        return str.replace(/([a-z])([A-Z0-9])/g, '$1_$2').toLowerCase();
+    }
+
     public static capitalize(str: string) : string
     {
         return str[0].toUpperCase() + str.substring(1);

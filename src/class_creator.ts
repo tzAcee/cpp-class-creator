@@ -31,6 +31,7 @@ export class class_creator
         var upper_regex             : RegExp = /{{\*CLASSNAMEUPPER\*}}/gi;
         var lower_regex             : RegExp = /{{\*CLASSNAMELOWER\*}}/gi;
         var cap_regex               : RegExp = /{{\*CLASSNAMECAPI\*}}/gi;
+        var snake_case_regex        : RegExp = /{{\*CLASSNAMESNAKE\*}}/gi;
         var default_regex           : RegExp = /{{\*CLASSNAME\*}}/gi;
         var headerfilename_regex    : RegExp = /{{\*HEADERFILENAME\*}}/gi;
         var sourcefilename_regex    : RegExp = /{{\*SOURCEFILENAME\*}}/gi;
@@ -42,6 +43,7 @@ export class class_creator
             { reg_expression: upper_regex, replace_string: regex_commands.upper_case(this.class_name)},// CLASSNAMEUPPER - default classname to upper
             { reg_expression: lower_regex, replace_string: regex_commands.lower_case(this.class_name)},// CLASSNAMELOWER - default classname to lower
             { reg_expression: cap_regex, replace_string: regex_commands.capitalize(this.class_name)},  // CLASSNAMECAPI  - default classname with capitalized first letter
+            { reg_expression: snake_case_regex, replace_string: regex_commands.to_snake_case(this.class_name)}, // CLASSNAMESNAKE  - default CamelCase classname in snake_case
             { reg_expression: default_regex, replace_string: regex_commands.default(this.class_name)}, // CLASSNAME      - default classname
         ]
 
@@ -51,6 +53,7 @@ export class class_creator
             { reg_expression: upper_regex, replace_string: regex_commands.upper_case(this.class_name)},      // CLASSNAMEUPPER - default classname to upper
             { reg_expression: lower_regex, replace_string: regex_commands.lower_case(this.class_name)},      // CLASSNAMELOWER - default classname to lower
             { reg_expression: cap_regex, replace_string: regex_commands.capitalize(this.class_name)},        // CLASSNAMECAPI  - default classname with capitalized first letter
+            { reg_expression: snake_case_regex, replace_string: regex_commands.to_snake_case(this.class_name)}, // CLASSNAMESNAKE  - default CamelCase classname in snake_case
             { reg_expression: default_regex, replace_string: regex_commands.default(this.class_name)},       // CLASSNAME      - default classname
             { reg_expression: datetime_regex, replace_string: regex_commands.current_date_time()},      // CURRENTDATETIME  - the current date and time
             { reg_expression: date_regex, replace_string: regex_commands.current_date()},               // CURRENTDATE      - the current date
